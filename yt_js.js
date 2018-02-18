@@ -6,6 +6,8 @@ videoIds[4] = "dRnrjyJV25I";
 videoIds[5] = "BqrxDM8Ks_o";
 videoIds[6] = "k_Oa7tciRF4";
 videoIds[7] = "RarGmcm0xEg";
+videoIds[8] = "RarGmcm0xEg";
+
 
 
 var newstr = window.location.href.replace('https://tpc.googlesyndication.com/safeframe/1-0-14/html/container.html#ai=',"");
