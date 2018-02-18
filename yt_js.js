@@ -1,13 +1,21 @@
 var  videoIds = new Array();
-videoIds[1] = "RarGmcm0xEg";
-videoIds[2] = "iGI2rvpnvbE";
+videoIds[1] = "HsoT2CtuyTM";
+videoIds[2] = "azBbs71AFMY";
 videoIds[3] = "VxPmfjv2X60";
 videoIds[4] = "dRnrjyJV25I";
 videoIds[5] = "BqrxDM8Ks_o";
 videoIds[6] = "k_Oa7tciRF4";
-videoIds[7] = "RarGmcm0xEg";
-videoIds[8] = "RarGmcm0xEg";
-
+videoIds[7] = "G95-c2YqNQU";
+videoIds[8] = "KHSTx_xFD6U";
+videoIds[9] = "j4ttCNFNidI";
+videoIds[10] = "V5hATXWxT-Q";
+videoIds[11] = "2iX2eV8W76Y";
+videoIds[12] = "fs6JdPSPzH4";
+videoIds[13] = "SI3jXFP-8tI";
+videoIds[14] = "XvOz7CXIbqw";
+videoIds[15] = "6PTEn0YJBGo";
+videoIds[16] = "jXqo3zaN0j4";
+videoIds[17] = "NvjscPF3U6E";
 
 
 var newstr = window.location.href.replace('https://tpc.googlesyndication.com/safeframe/1-0-14/html/container.html#ai=',"");
