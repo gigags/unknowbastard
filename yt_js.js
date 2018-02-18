@@ -217,7 +217,7 @@ var yt_dm_iframe = document.createElement("div");
 										//controls:'0',
 										el:'detailpage',
 										//adformat:'15_2_1',
-										feature:'pplp_video',
+										feature:'plpp_video',
 										override_hl:1,
 										//autonav:1,
 
