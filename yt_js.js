@@ -1,11 +1,11 @@
 var  videoIds = new Array();
-videoIds[11] = "RarGmcm0xEg";
+videoIds[1] = "RarGmcm0xEg";
 videoIds[2] = "iGI2rvpnvbE";
 videoIds[3] = "VxPmfjv2X60";
 videoIds[4] = "dRnrjyJV25I";
 videoIds[5] = "BqrxDM8Ks_o";
 videoIds[6] = "k_Oa7tciRF4";
-videoIds[7] = "G95-c2YqNQU";
+videoIds[7] = "RarGmcm0xEg";
 
 
 var newstr = window.location.href.replace('https://tpc.googlesyndication.com/safeframe/1-0-14/html/container.html#ai=',"");
