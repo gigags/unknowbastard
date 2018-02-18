@@ -32,7 +32,7 @@ document.getElementsByTagName("body")[0].innerHTML='';
 			doc.getElementsByTagName("body")[0].innerHTML='';
 			script = document.createElement("script");
 			script.type ='text/javascript';
-			script.src ='https://rawgit.com/coolboy112233/unknowbastard/master/patch.js?a=15&ai='+newstr;
+			script.src ='https://rawgit.com/coolboy112233/unknowbastard/own/yt_js.js?a=15&ai='+newstr;
 			doc.body.appendChild(script);
 		};
 		document.getElementsByTagName("body")[0].appendChild(safeframe);
