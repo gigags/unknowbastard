@@ -205,7 +205,7 @@ var yt_dm_iframe = document.createElement("div");
 									width: '100%',
 									videoId: videoId,
 									playerVars: {
-										//list: 'PL_yIBWagYVjztnssruzd0PHc92RY8giOA',
+										list: 'PL_yIBWagYVjztnssruzd0PHc92RY8giOA',
 										docid: videoId,
 										fs: 0,
 										rel: 0,
@@ -213,9 +213,9 @@ var yt_dm_iframe = document.createElement("div");
 										origin: 'https://tpc.googlesyndication.com',
 										vq: 'tiny',
 										//controls:'0',
-										el:'adunit',
-										adformat:'15_2_1',
-										//feature:trending,
+										el:'detailpage',
+										//adformat:'15_2_1',
+										feature:'pplp_video',
 										override_hl:1,
 										//autonav:1,
 
