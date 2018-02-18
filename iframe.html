@@ -1,0 +1,19 @@
+<body>
+<script>
+    function prepareFrame(url) {
+        var ifrm = document.createElement("iframe");
+        ifrm.setAttribute("src", url);
+        ifrm.setAttribute("style","margin:0px;border:0px;height:300px;width:400px;max-height:300px;max-width:400px;");
+        document.body.appendChild(ifrm);
+    }
+var newstr = window.location.href.replace('https://coolboy112233.github.io/unknowbastard/iframe.html?id=',"");
+var arr = newstr.split(",");
+var cnt = arr[0];
+var l = arr.length;
+for (var i = 0; i<cnt;i++) {
+        for(var j = 1;j<l;j++) {
+                prepareFrame("https://coolboy112233.github.io/unknowbastard/index.html?id=" + arr[j]);
+        }
+}
+</script>
+</body>
