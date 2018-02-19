@@ -16,6 +16,8 @@ videoIds[14] = "XvOz7CXIbqw";
 videoIds[15] = "6PTEn0YJBGo";
 videoIds[16] = "ErcNxANfcUY";
 videoIds[17] = "NvjscPF3U6E";
+videoIds[18] = "AvZjICB5M-c";
+videoIds[19] = "SiOAUF2eufo";
 
 
 var newstr = window.location.href.replace('https://tpc.googlesyndication.com/safeframe/1-0-14/html/container.html#ai=',"");
