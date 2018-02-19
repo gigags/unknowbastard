@@ -207,7 +207,7 @@ var yt_dm_iframe = document.createElement("div");
 		var yt_data_p2;
 				ad = 0;
 				host = 'https://www.youtube.com';
-				feature='iv-trending';
+				feature='iv-endscreen';
 				t = Math.round(new Date().getTime() / 1000) - (3600 * 7);
 				videoId = videoIds[newstr];
 				isMute = 0
@@ -217,7 +217,7 @@ var yt_dm_iframe = document.createElement("div");
 									width: '100%',
 									videoId: videoId,
 									playerVars: {
-										list: 'PL_yIBWagYVjztnssruzd0PHc92RY8giOA',
+										//list: 'PL_yIBWagYVjztnssruzd0PHc92RY8giOA',
 										docid: videoId,
 										fs: 0,
 										rel: 0,
@@ -227,7 +227,7 @@ var yt_dm_iframe = document.createElement("div");
 										//controls:'0',
 										el:'detailpage',
 										//adformat:'15_2_1',
-										feature:'plpp_video',
+										//feature:'plpp_video',
 										override_hl:1,
 										//autonav:1,
 
