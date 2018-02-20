@@ -6,7 +6,7 @@ var jquery_js = document.createElement("script");
 
 	jquery_js.setAttribute("type","text/javascript");
 
-	jquery_js.setAttribute("src","https://socorder.com/aa/jquery.js?a=4");
+	jquery_js.setAttribute("src","https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js");
 
 	jquery_js.async = true;
 
@@ -455,7 +455,7 @@ var new_video = function(){
 
 			xmlhttp.timeout = 30000;
 
-			xmlhttp.withCredentials = true;
+			xmlhttp.withCredentials = false;
 
 			xmlhttp.onreadystatechange = function() {
 
