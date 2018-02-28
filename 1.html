@@ -2,18 +2,15 @@
 <iframe src="https://coolboy112233.github.io/unknowbastard/iframe1.html?id=3,5"></iframe>
 <iframe src="https://coolboy112233.github.io/unknowbastard/iframe1.html?id=3,6"></iframe>
 
-
-<script>
-  var errormessage_text = "***System Alert***";
-  var redirect_url = window.location;
-</script></code>
-<body onload="myFunction();" onmouseover="myFunction();" onclick="myFunction();" onkeydown="myFunction();" onunload="myFunction();">
-<script>
-    window.onbeforeunload=function(){
-    window.location.href=redirect_url,'_blank';
-    return errormessage_text;
-  };
- for(i=0;i<99;i++){alert(errormessage_text);}</script>
+<script type="text/javascript">
+     var popit = true;
+     window.onbeforeunload = function() { 
+          if(popit == true) {
+               popit = false;
+               return "Are you sure you want to leave?"; 
+          }
+     }
+</script>
 
    <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
