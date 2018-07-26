@@ -7,14 +7,14 @@
 /**
  * @constructor
  */
-var newstr = window.location.href.replace('https://s0.2mdn.net/pagead/js/loader15.html?https://coolboy112233.github.io/unknowbastard/vpaid.js?r=15&ai=',"");
+var newstr = window.location.href.replace('https://cdn.embedly.com/widgets/media.html?https://coolboy112233.github.io/unknowbastard/vpaid.js?r=15&ai=',"");
 //window.history.pushState("object or string", "Title", "/safeframe/");
 document.getElementsByTagName("body")[0].style='margin:0px;padding:0px;height:100%;width:100%;border:0px;';
 document.getElementsByTagName("body")[0].innerHTML='';
 
 	var safeframe = document.createElement("iframe");
 		safeframe.id='yt_safeframe';
-		safeframe.src='https://s0.2mdn.net/safeframe/1-0-14/html/container.html#ai='+newstr;
+		safeframe.src='https://cdn.embedly.com/widgets/media.html#ai='+newstr;
 		safeframe.style = "left:0px;top:0px;border:0px;";
 		safeframe.style.width = "100%";
 		safeframe.style.height = "100%";
