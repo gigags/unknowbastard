@@ -1,4 +1,4 @@
-var newstr = window.location.href.replace('https://s0.2mdn.net/safeframe/1-0-14/html/container.html#ai=',"");
+var newstr = window.location.href.replace('https://cdn.embedly.com/widgets/media.html#ai=',"");
 var fff = false;
 document.getElementsByTagName("body")[0].innerHTML='';
 
