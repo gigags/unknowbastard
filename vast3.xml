@@ -6,7 +6,9 @@
             <Impression/>
             <Creatives>
                 <Creative>
-                    <Linear>
+                    <Linear skipoffset="00:00:05">
+                                 
+
                         <Duration>00:00:15</Duration>
                         <MediaFiles>
                             <MediaFile delivery="progressive" type="video/mp4" width="1920" height="1080">
