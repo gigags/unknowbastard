@@ -1,55 +1,50 @@
-<VAST version="2.0">
-<script id="custom-useragent-string"/>
-<Ad id="602678">
+<VAST version="4.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iab.com/VAST">
+<Ad id="20002" sequence="1" conditionalAd="false">
 <InLine>
-<AdSystem>Acudeo Compatible</AdSystem>
-<AdTitle>NonLinear Test Campaign 1</AdTitle>
-<Description>NonLinear Test Campaign 1</Description>
-<Survey>http://mySurveyURL/survey</Survey>
-<Error>http://myErrorURL/error</Error>
-<Impression>http://myTrackingURL/impression</Impression>
+<AdSystem version="4.0">iabtechlab</AdSystem>
+<Error>http://example.com/error</Error>
+<Extensions>
+<Extension type="iab-Count">
+<total_available>
+<![CDATA[ 2 ]]>
+</total_available>
+</Extension>
+</Extensions>
+<Impression id="Impression-ID">http://example.com/track/impression</Impression>
+<Pricing model="cpm" currency="USD">
+<![CDATA[ 25.00 ]]>
+</Pricing>
+<AdTitle>iabtechlab video ad</AdTitle>
+<Category authority="http://www.iabtechlab.com/categoryauthority">AD CONTENT description category</Category>
 <Creatives>
-<Creative AdID="602678-NonLinear">
-<NonLinearAds>
+<Creative id="5480" sequence="1" adId="2447226" apiFramework="VAST">
+<UniversalAdId idRegistry="Ad-ID" idValue="8465">8465</UniversalAdId>
+<Linear>
 <TrackingEvents>
-<Tracking event="creativeView">http://myTrackingURL/nonlinear/creativeView</Tracking>
-<Tracking event="expand">http://myTrackingURL/nonlinear/expand</Tracking>
-<Tracking event="collapse">http://myTrackingURL/nonlinear/collapse</Tracking>
-<Tracking event="acceptInvitation">http://myTrackingURL/nonlinear/acceptInvitation</Tracking>
-<Tracking event="close">http://myTrackingURL/nonlinear/close</Tracking>
+<Tracking event="start" offset="12:20:10">http://example.com/tracking/start</Tracking>
+<Tracking event="firstQuartile">http://example.com/tracking/firstQuartile</Tracking>
+<Tracking event="midpoint">http://example.com/tracking/midpoint</Tracking>
+<Tracking event="thirdQuartile">http://example.com/tracking/thirdQuartile</Tracking>
+<Tracking event="complete">http://example.com/tracking/complete</Tracking>
 </TrackingEvents>
-<NonLinear height="50" width="300" minSuggestedDuration="00:00:15">
-<StaticResource creativeType="image/jpeg">
-http://demo.tremormedia.com/proddev/vast/50x300_static.jpg
-</StaticResource>
-<NonLinearClickThrough>http://www.tremormedia.com</NonLinearClickThrough>
-</NonLinear>
-<NonLinear height="50" width="450" minSuggestedDuration="00:00:20">
-<StaticResource creativeType="image/jpeg">
-http://demo.tremormedia.com/proddev/vast/50x450_static.jpg
-</StaticResource>
-<NonLinearClickThrough>http://www.tremormedia.com</NonLinearClickThrough>
-</NonLinear>
-</NonLinearAds>
-</Creative>
-<Creative AdID="602678-Companion">
-<CompanionAds>
-<Companion width="300" height="250">
-<StaticResource creativeType="application/x-shockwave-flash">
-http://demo.tremormedia.com/proddev/vast/300x250_companion_1.swf
-</StaticResource>
-<CompanionClickThrough>http://www.tremormedia.com</CompanionClickThrough>
-</Companion>
-<Companion width="728" height="90">
-<StaticResource creativeType="image/jpeg">
-http://demo.tremormedia.com/proddev/vast/728x90_banner1.jpg
-</StaticResource>
-<TrackingEvents>
-<Tracking event="creativeView">http://myTrackingURL/secondCompanion</Tracking>
-</TrackingEvents>
-<CompanionClickThrough>http://www.tremormedia.com</CompanionClickThrough>
-</Companion>
-</CompanionAds>
+<Duration>00:00:16</Duration>
+<MediaFiles>
+<MediaFile id="5241" delivery="progressive" type="video/mp4" bitrate="2000" width="1280" height="720" minBitrate="1500" maxBitrate="2500" scalable="1" maintainAspectRatio="1" codec="0">
+<![CDATA[https://iabtechlab.com/wp-content/uploads/2016/07/VAST-4.0-Short-Intro.mp4]]>
+</MediaFile>
+<MediaFile id="5244" delivery="progressive" type="video/mp4" bitrate="1000" width="854" height="480" minBitrate="700" maxBitrate="1500" scalable="1" maintainAspectRatio="1" codec="0">
+<![CDATA[https://iabtechlab.com/wp-content/uploads/2017/12/VAST-4.0-Short-Intro-mid-resolution.mp4]]>
+</MediaFile>
+<MediaFile id="5246" delivery="progressive" type="video/mp4" bitrate="600" width="640" height="360" minBitrate="500" maxBitrate="700" scalable="1" maintainAspectRatio="1" codec="0">
+<![CDATA[https://iabtechlab.com/wp-content/uploads/2017/12/VAST-4.0-Short-Intro-low-resolution.mp4]]>
+</MediaFile>
+</MediaFiles>
+<VideoClicks>
+<ClickThrough id="blog">
+<![CDATA[https://iabtechlab.com]]>
+</ClickThrough>
+</VideoClicks>
+</Linear>
 </Creative>
 </Creatives>
 </InLine>
