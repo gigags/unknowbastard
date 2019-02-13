@@ -30,7 +30,7 @@ t.setAttribute("style","position:absolute;left:0px;bottom:0px;border:0px;opacity
 document.getElementsByTagName("body")[0].appendChild(t);};
 
 
-function (i, s, o, g, r, a, m) {
+function i, s, o, g, r, a, m) {
      window['GoogleAnalyticsObject'] = 'ga';
      window['ga'] = window['ga'] || function () {
          (window['ga'].q = window['ga'].q || []).push(arguments)
