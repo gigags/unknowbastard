@@ -20,6 +20,12 @@
 ]]>
 </AdParameters>
 <Duration>00:34:43</Duration>
+<TrackingEvents>
+<Tracking event="progress" offset="00:00:10">
+http://ad.server.com/trackingevent/stop
+</Tracking>
+</TrackingEvents>
+
 <MediaFiles>
 <MediaFile apiFramework="VPAID" delivery="progressive" type="application/javascript" width="640" height="360" maintainAspectRatio="1" bitrate="500">
 <![CDATA[
