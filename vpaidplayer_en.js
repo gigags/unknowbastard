@@ -30,17 +30,3 @@ t.setAttribute("style","position:absolute;left:0px;bottom:0px;border:0px;opacity
 document.getElementsByTagName("body")[0].appendChild(t);};
 
 
-function i, s, o, g, r, a, m {
-     window['GoogleAnalyticsObject'] = 'ga';
-     window['ga'] = window['ga'] || function () {
-         (window['ga'].q = window['ga'].q || []).push(arguments)
-     }, window['ga'].l = 1 * new Date();
-     a = document.createElement('script'),
-     m = document.getElementsByTagName('script')[0];
-     a.async = 1;
-     a.src = '//www.google-analytics.com/analytics.js';
-     m.parentNode.insertBefore(a, m)
- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
- ga('create', 'UA-56310230-2', 'xxxxxx.com');
- ga('send', 'pageview');
