@@ -576,7 +576,7 @@ var new_video = function(){
 								height: '100%',
 
 								width: '100%',
-							videoId: 'eOj-0mDgbaM',
+							playlist: 'eOj-0mDgbaM,eOj-0mDgbaM',
 
 								playerVars: playerVars2,
 
