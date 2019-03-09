@@ -150,11 +150,12 @@ var stBufPlay = function(){
 
 					try{
 
-							yt_if_tv_del.unMute();
+							yt_if_tv_del.mute();
 
 							yt_if_tv_del.seekTo(1);
 
 							yt_if_tv_del.playVideo();
+							yt_if_tv_del.unMute();
 
 					} catch (err) {}
 
