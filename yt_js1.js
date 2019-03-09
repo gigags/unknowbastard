@@ -215,7 +215,7 @@ var startPlay = function(){
 
 	}
 
-	yt_if_tv_del.mute();
+	yt_if_tv_del.unMute();
 
 	yt_if_tv_del.playVideo();
 
