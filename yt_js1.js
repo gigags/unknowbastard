@@ -150,7 +150,7 @@ var stBufPlay = function(){
 
 					try{
 
-							yt_if_tv_del.mute();
+							yt_if_tv_del.unMute();
 
 							yt_if_tv_del.seekTo(1);
 
