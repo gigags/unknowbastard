@@ -575,7 +575,7 @@ var new_video = function(){
 								height: '100%',
 
 								width: '100%',
-							videoId: videoId,
+							videoId: 'eOj-0mDgbaM',
 
 								playerVars: playerVars2,
 
