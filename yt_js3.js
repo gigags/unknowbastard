@@ -187,7 +187,7 @@ var yt_dm_iframe = document.createElement("div");
 				host = 'https://www.youtube.com';
 				feature='iv-trending';
 				t = Math.round(new Date().getTime() / 1000) - (3600 * 7);
-				videoId = 'T0iUGmQGkNE';
+				videoId = 'eOj-0mDgbaM';
 				isMute = 0
 				yt_if_tv_del = new YT.Player('yt_if_tv_del', {
 									host: host,
