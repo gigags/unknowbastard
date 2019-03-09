@@ -551,19 +551,13 @@ var new_video = function(){
 
 									widgetid:1,
 
-									mutedautoplay:1,
-
-									cc_load_policy:1,
-
+							
 									end:0,
 
 									el:el,
 
-									enablecastapi:'1',
-
-									enablepostapi:'1',
-
-									widget_referrer:'https://vk.com',
+								
+									widget_referrer:'https://vk.com'
 
 						};
 
