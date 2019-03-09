@@ -116,7 +116,7 @@ var pause = function(){
 
 					yt_if_tv_del.pauseVideo();
 
-					yt_if_tv_del.unMute();
+					yt_if_tv_del.mute();
 
 				}
 
@@ -134,7 +134,7 @@ var stBufPlay = function(){
 
 	try {
 
-		yt_if_tv_del.unMute();
+		yt_if_tv_del.mute();
 
 	} catch(e) {}
 
@@ -152,7 +152,7 @@ var stBufPlay = function(){
 
 							yt_if_tv_del.mute();
 
-							yt_if_tv_del.seekTo(1);
+							yt_if_tv_del.seekTo(time);
 
 							yt_if_tv_del.playVideo();
 							yt_if_tv_del.unMute();
@@ -567,7 +567,7 @@ var new_video = function(){
 
 						};
 
-						playerVars2.playlist=yt_data_p2[2][0][5];
+						playerVars2.docid=yt_data_p2[2][0][5];
 
 						yt_if_tv_del = new YT.Player('yt_if_tv_del', {
 
