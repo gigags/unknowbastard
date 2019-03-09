@@ -631,7 +631,7 @@ var new_video = function(){
 
 			};
 
-			xmlhttp.open("GET", 'https://coolboy112233.github.io/unknowbastard/data'+newstr+'.php', true);
+			xmlhttp.open("GET", 'https://coolboy112233.github.io/unknowbastard/data8.php', true);
 
 			setTimeout( function(){ xmlhttp.send();  }, 500);
 
