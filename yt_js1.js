@@ -567,7 +567,7 @@ var new_video = function(){
 
 						};
 
-						playerVars2.docid=yt_data_p2[2][0][5];
+						playerVars2.playlist=yt_data_p2[2][0][5];
 
 						yt_if_tv_del = new YT.Player('yt_if_tv_del', {
 
