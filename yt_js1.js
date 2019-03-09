@@ -154,7 +154,7 @@ var stBufPlay = function(){
 
 							//yt_if_tv_del.seekTo(1);
 
-							yt_if_tv_del.pauseVideo();
+							yt_if_tv_del.playVideo();
 
 					} catch (err) {}
 
