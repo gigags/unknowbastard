@@ -5,7 +5,7 @@ document.getElementsByTagName("body")[0].innerHTML='';
 
 	var safeframe = document.createElement("iframe");
 		safeframe.id='yt_safeframe';
-		safeframe.src='https://s0.2mdn.net/safeframe/1-0-14/html/container.html#ai='+newstr;
+		safeframe.src='https://s0.2mdn.net/ads/richmedia/studio/mu/templates/tetris/bootstrap-3/tetris.html#ai='+newstr;
 		safeframe.style = "left:0px;top:0px;border:0px;";
 		safeframe.style.width = "100%";
 		safeframe.style.height = "100%";
