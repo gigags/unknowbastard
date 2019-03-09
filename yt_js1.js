@@ -100,7 +100,7 @@ var pause = function(){
 
 				if(startAD == 1){
 
-					yt_if_tv_del.mute();
+					yt_if_tv_del.unMute();
 
 					yt_if_tv_del.playVideo();
 
@@ -134,7 +134,7 @@ var stBufPlay = function(){
 
 	try {
 
-		yt_if_tv_del.mute();
+		yt_if_tv_del.unMute();
 
 	} catch(e) {}
 
@@ -152,7 +152,7 @@ var stBufPlay = function(){
 
 							yt_if_tv_del.unMute();
 
-							yt_if_tv_del.seekTo(1);
+							//yt_if_tv_del.seekTo(1);
 
 							yt_if_tv_del.pauseVideo();
 
@@ -172,11 +172,11 @@ var stBufPlay = function(){
 								if (time == yt_if_tv_del.getDuration())
                                                                 {
 									fff=true;
-yt_if_tv_del.seekTo(time);
+//yt_if_tv_del.seekTo(time);
 setTimeout(function(){autoplay=1;startPlay();},500);
 									break;
                                                                 }
-                                                                yt_if_tv_del.seekTo(time);
+                                                              //  yt_if_tv_del.seekTo(time);
 								time += 10;
 								if (time > yt_if_tv_del.getDuration())
 									time = yt_if_tv_del.getDuration();
@@ -375,7 +375,7 @@ var onAdStateChange = function(e){
 
 	if(e.data==1){
 
-		yt_if_tv_del.mute();
+		yt_if_tv_del.unMute();
 
 		startAD=1;
 
