@@ -193,7 +193,7 @@ var yt_dm_iframe = document.createElement("div");
 		var xhrTimeout;
 		var yt_data_p2;
 				ad = 0;
-				host = 'https://www.youtube.com/';
+				host = 'https://www.youtube.com';
 				feature='iv-trending';
 				t = Math.round(new Date().getTime() / 1000) - (3600 * 7);
 				videoId = videoIds[newstr];
