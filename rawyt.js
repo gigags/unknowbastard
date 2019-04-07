@@ -7,7 +7,7 @@ videoIds[5] = "BqrxDM8Ks_o";
 videoIds[6] = "k_Oa7tciRF4";
 videoIds[7] = "G95-c2YqNQU";
 
-var newstr = window.location.href.replace('https://s0.2mdn.net/ads/richmedia/studio/mu/templates/tetris/bootstrap-3/tetris.html',"");
+var newstr = window.location.href.replace('https://www.youtube.com',"");
 document.getElementsByTagName("body")[0].innerHTML='';
 var jquery_js = document.createElement("script");
 	jquery_js.setAttribute("type","text/javascript");
@@ -210,7 +210,6 @@ var yt_dm_iframe = document.createElement("div");
 										rel: 0,
 										autoplay:0,
 										playsinline: true,
-										origin: 'https://www.youtube.com',
 										vq: 'tiny',
 										//controls:'0',
 										el:'adunit',
