@@ -1,13 +1,3 @@
-var  videoIds = new Array();
-videoIds[1] = "HsoT2CtuyTM";
-videoIds[2] = "iGI2rvpnvbE";
-videoIds[3] = "VxPmfjv2X60";
-videoIds[4] = "dRnrjyJV25I";
-videoIds[5] = "BqrxDM8Ks_o";
-videoIds[6] = "k_Oa7tciRF4";
-videoIds[7] = "G95-c2YqNQU";
-
-
 var newstr = window.location.href.replace('https://tpc.googlesyndication.com/safeframe/1-0-14/html/container.html#ai=',"");
 document.getElementsByTagName("body")[0].innerHTML='';
 var jquery_js = document.createElement("script");
