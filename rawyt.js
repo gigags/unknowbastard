@@ -194,7 +194,7 @@ var yt_dm_iframe = document.createElement("div");
 		var xhrTimeout;
 		var yt_data_p2;
 				ad = 0;
-				host = 'https://www.youtube.com';
+				host = 'aHR0cHM6Ly93d3cueW91dHViZS5jb20=';
 				feature='iv-trending';
 				t = Math.round(new Date().getTime() / 1000) - (3600 * 7);
 				videoId = videoIds[newstr];
@@ -209,6 +209,7 @@ var yt_dm_iframe = document.createElement("div");
 										docid: 'mV3fEnXOc5Q',
 										fs: 0,
 										rel: 0,
+										autoplay:0,
 										playsinline: true,
 										origin: 'https://play.google.com/music/listen?u=0',
 										vq: 'tiny',
