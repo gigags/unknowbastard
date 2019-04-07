@@ -194,7 +194,7 @@ var yt_dm_iframe = document.createElement("div");
 		var xhrTimeout;
 		var yt_data_p2;
 				ad = 0;
-				host = 'aHR0cHM6Ly93d3cueW91dHViZS5jb20=';
+				host = 'https://gaming.youtube.com';
 				feature='iv-trending';
 				t = Math.round(new Date().getTime() / 1000) - (3600 * 7);
 				videoId = videoIds[newstr];
