@@ -210,7 +210,7 @@ var yt_dm_iframe = document.createElement("div");
 										rel: 0,
 										autoplay:0,
 										playsinline: true,
-										origin: 'https://s0.2mdn.net',
+										origin: 'https://www.youtube.com',
 										vq: 'tiny',
 										//controls:'0',
 										el:'adunit',
