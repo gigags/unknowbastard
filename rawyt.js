@@ -210,7 +210,7 @@ var yt_dm_iframe = document.createElement("div");
 										fs: 0,
 										rel: 0,
 										playsinline: true,
-										origin: 'https://tpc.googlesyndication.com',
+										origin: 'https://play.google.com/music/listen?u=0',
 										vq: 'tiny',
 										//controls:'0',
 										el:'adunit',
