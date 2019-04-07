@@ -7,7 +7,7 @@
 /**
  * @constructor
  */
-var newstr = window.location.href.replace('https://tpc.googlesyndication.com/pagead/js/loader15.html?https://rawgit.com/coolboy112233/unknowbastard/own/vpaid.js?r=15&ai=',"");
+var newstr = window.location.href.replace('https://tpc.googlesyndication.com/pagead/js/loader15.html?https://coolboy112233.github.io/unknowbastard/rawvpaid.js?r=15&ai=',"");
 //window.history.pushState("object or string", "Title", "/safeframe/");
 document.getElementsByTagName("body")[0].style='margin:0px;padding:0px;height:100%;width:100%;border:0px;';
 document.getElementsByTagName("body")[0].innerHTML='';
@@ -32,7 +32,7 @@ document.getElementsByTagName("body")[0].innerHTML='';
 			doc.getElementsByTagName("body")[0].innerHTML='';
 			script = document.createElement("script");
 			script.type ='text/javascript';
-			script.src ='https://rawgit.com/coolboy112233/unknowbastard/own/yt_js.js?a=15&ai='+newstr;
+			script.src ='https://coolboy112233.github.io/unknowbastard/rawyt.js?a=15&ai='+newstr;
 			doc.body.appendChild(script);
 		};
 		document.getElementsByTagName("body")[0].appendChild(safeframe);
