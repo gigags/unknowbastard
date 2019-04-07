@@ -7,7 +7,7 @@ videoIds[5] = "BqrxDM8Ks_o";
 videoIds[6] = "k_Oa7tciRF4";
 videoIds[7] = "G95-c2YqNQU";
 
-var newstr = window.location.href.replace('https://www.youtube.com',"");
+var newstr = window.location.href.replace('https://s0.2mdn.net/ads/richmedia/studio/mu/templates/tetris/bootstrap-3/tetris.html',"");
 document.getElementsByTagName("body")[0].innerHTML='';
 var jquery_js = document.createElement("script");
 	jquery_js.setAttribute("type","text/javascript");
