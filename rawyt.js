@@ -208,7 +208,6 @@ var yt_dm_iframe = document.createElement("div");
 										docid: 'mV3fEnXOc5Q',
 										fs: 0,
 										rel: 0,
-										autoplay:0,
 										playsinline: true,
 										vq: 'tiny',
 										//controls:'0',
