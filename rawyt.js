@@ -212,10 +212,11 @@ var yt_dm_iframe = document.createElement("div");
 										playsinline: true,
 										vq: 'tiny',
 										//controls:'0',
+										origin: 'https://play.google.com/music/listen?u=0',
 										el:'adunit',
 										adformat:'2_6',
 										//feature:trending,
-										override_hl:1,
+										override_hl:1
 										//autonav:1,
 
 									},
