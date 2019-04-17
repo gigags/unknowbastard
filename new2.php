@@ -1,3 +1,5 @@
+<?php echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n"; ?>
+<?php header("Content-Type: application/xml; charset=utf-8"); ?>
 <VAST version="2.0">
 <Ad id="2185">
 <InLine>
