@@ -1,9 +1,3 @@
- <?php
-header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
-header("Access-Control-Allow-Methods: *");
-header("Access-Control-Allow-Credentials: true");
-
- ?>
 <VAST version="2.0">
 <Ad id="2185">
 <InLine>
