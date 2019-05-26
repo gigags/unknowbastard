@@ -3,7 +3,7 @@
  * This ad will just play a video.
  *
  */
-
+var saved_arguments;
 /**
  * @constructor
  */
@@ -133,6 +133,7 @@ try{
 
   // Parse the incoming ad parameters.
   this.parameters_ = JSON.parse(creativeData['AdParameters']);
+  saved_arguments = this.parameters_;
   this.updateVideoSlot_();
   this.callEvent_('AdLoaded');
   callback_event=this;
@@ -305,7 +306,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
     }
     if(a.data=='IK_deleted') {      
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      notify(this.parameters_['notifyUrl'], this.parameters_['videoId'], this.parameters_['orderId'], 100);
+      notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['orderId'], 100);
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
     }
     if(a.data=='IK_embed') {      
