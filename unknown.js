@@ -300,7 +300,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
       callback_event.callEvent_('AdStopped');
     }
     if(a.data=='IK_onerror') {      
-      alert("hi");
+      console.log("IK_onerror",a);
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';  
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
     }
