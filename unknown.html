@@ -677,6 +677,7 @@ function getURLParameter(sParam)
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, true);
                 xhttp.send();
+                send_YT("mute",1);
                 send_YT("destroy",1);
                 window.parent.postMessage('IK_view','*');
 
