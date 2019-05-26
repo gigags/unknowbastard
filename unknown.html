@@ -673,13 +673,13 @@ function getURLParameter(sParam)
             }
             if(date_p.event=="onError"){
               if (date_p.info == 100 || date_p.info == 101 || date_p.info == 150) {
-                var url = getURLParameter("notifyUrl") + "?videoId=" + getURLParameter("videoId") + "&action=" + date_p.info + "&orderId=" + getURLParameter("orderId");
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", url, true);
-                xhttp.send();
+                var append = "deleted";
+                if (date_p.info == 101 || date_p.info == 150) {
+                    append = "embed";
+                }
                 send_YT("mute",1);
                 send_YT("destroy",1);
-                window.parent.postMessage('IK_onerror','*');
+                window.parent.postMessage('IK_'+append,'*');
 
               } else {
                 window.location.reload();
