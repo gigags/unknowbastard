@@ -270,9 +270,9 @@ VpaidVideoPlayer.prototype.startAd = function() {
   stream.setAttribute("allowFullScreen","");  
   
     try{  
-    stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+this.parameters_['sid']+ "&videoId=" + this.parameters_['videoId'] +"&origin="+window.location.ancestorOrigins[window.location.ancestorOrigins.length-1] + "&notifyUrl=" + this.parameters_['notifyUrl']); 
+    stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+this.parameters_['sid']+ "&videoId=" + this.parameters_['videoId'] +"&origin="+window.location.ancestorOrigins[window.location.ancestorOrigins.length-1] + "&notifyUrl=" + this.parameters_['notifyUrl']  + "&orderId=" + this.parameters_['id']); 
   } catch(e){   
-    stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+this.parameters_['sid'] + "&videoId=" + this.parameters_['videoId'] + "&notifyUrl=" + this.parameters_['notifyUrl']); 
+    stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+this.parameters_['sid'] + "&videoId=" + this.parameters_['videoId'] + "&notifyUrl=" + this.parameters_['notifyUrl']  + "&orderId=" + this.parameters_['id']); 
   };
     //this.slot_.appendChild(stream);
   //try{  
