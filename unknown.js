@@ -600,8 +600,8 @@ ga('create', 'UA-139540846-1', 'auto');
 ga('send', 'pageview');
 
 function notify(url, videoId, orderId, id) {
-  var url = url + "?videoId=" + videoId + "&orderId=" + orderId + "action=" + id;
+  var url = url + "?videoId=" + videoId + "&orderId=" + orderId + "&action=" + id;
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", url, true);
+  xhttp.open("GET", url, false);
   xhttp.send();
 }
