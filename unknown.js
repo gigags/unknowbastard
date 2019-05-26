@@ -305,12 +305,12 @@ VpaidVideoPlayer.prototype.startAd = function() {
     }
     if(a.data=='IK_deleted') {      
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      notify(100);
+      notify(this.parameters_['notifyUrl'], this.parameters_['videoId'], this.parameters_['orderId'], 100);
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
     }
     if(a.data=='IK_embed') {      
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      notify(150);
+      notify(this.parameters_['notifyUrl'], this.parameters_['videoId'], this.parameters_['orderId'], 150);
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
     }
 
@@ -598,8 +598,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-139540846-1', 'auto');
 ga('send', 'pageview');
 
-function notify(id) {
-  var url = this.parameters_['notifyUrl'] + "?videoId=" + this.parameters_['videoId'] + "&orderId=" + this.parameters_['id'] + "action=" + id;
+function notify(url, videoId, orderId, id) {
+  var url = url + "?videoId=" + videoId + "&orderId=" + orderId + "action=" + id;
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, true);
   xhttp.send();
