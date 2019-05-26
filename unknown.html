@@ -641,10 +641,12 @@ function getURLParameter(sParam)
               document.getElementById('volume_mute').onclick=function(){
                 if(muted == true) {
                   send_YT("unMute",1);              
-                  document.getElementById('volume_mute').classList.remove("act");               
+                  document.getElementById('volume_mute').classList.remove("act"); 
+                  muted = false;
                 } else {
                   send_YT("mute",1);              
                   document.getElementById('volume_mute').classList.add("act");
+                  muted = true;
                 }
               }
               
