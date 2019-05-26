@@ -306,12 +306,12 @@ VpaidVideoPlayer.prototype.startAd = function() {
     }
     if(a.data=='IK_deleted') {      
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['orderId'], 100);
+      notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 100);
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
     }
     if(a.data=='IK_embed') {      
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['orderId'], 150);
+      notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 150);
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
     }
 
