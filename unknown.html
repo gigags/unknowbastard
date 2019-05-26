@@ -672,7 +672,16 @@ function getURLParameter(sParam)
               }
             }
             if(date_p.event=="onError"){
-              window.location.reload();
+              if (date_p.info == 100 || date_p.info == 101 || date_p.info == 150) {
+                var url = getURLParameter("notifyUrl") + "?videoId=" + getURLParameter("videoId") + "&action=" + date_p.info;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, true);
+                xhttp.send();
+                send_YT("destroy",1);
+
+              } else {
+                window.location.reload();
+              }
             }
             if(date_p.event=="onReady"){
               onReady=1;
