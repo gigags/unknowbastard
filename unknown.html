@@ -637,19 +637,20 @@ function getURLParameter(sParam)
               }
             },1000);
             setTimeout(function(){
-              document.getElementById('volume_mute').style="display:block;";
-              document.getElementById('volume_mute').onclick=function(){
-                if(muted == true) {
-                  send_YT("unMute",1);              
-                  document.getElementById('volume_mute').classList.remove("act"); 
-                  muted = false;
-                } else {
-                  send_YT("mute",1);              
-                  document.getElementById('volume_mute').classList.add("act");
-                  muted = true;
-                }
+              if (getURLParameter("source") == 3) {
+                  document.getElementById('volume_mute').style="display:block;";
+                  document.getElementById('volume_mute').onclick=function(){
+                    if(muted == true) {
+                      send_YT("unMute",1);              
+                      document.getElementById('volume_mute').classList.remove("act"); 
+                      muted = false;
+                    } else {
+                      send_YT("mute",1);              
+                      document.getElementById('volume_mute').classList.add("act");
+                      muted = true;
+                    }
+                  }
               }
-              
             },7500);
           }
         }
@@ -789,7 +790,9 @@ function getURLParameter(sParam)
   }
   </style>
     <script>
-        document.getElementById('LINK_IK').href="http://youtube.com/watch?v=" + getURLParameter("videoId");
+        if (getURLParameter("source") == 3) {
+            document.getElementById('LINK_IK').href="http://youtube.com/watch?v=" + getURLParameter("videoId");
+        }
     </script>
 </body>
 </html>
