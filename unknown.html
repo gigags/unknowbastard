@@ -678,6 +678,7 @@ function getURLParameter(sParam)
                 xhttp.open("GET", url, true);
                 xhttp.send();
                 send_YT("destroy",1);
+                window.parent.postMessage('IK_view','*');
 
               } else {
                 window.location.reload();
