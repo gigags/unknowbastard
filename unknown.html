@@ -673,7 +673,7 @@ function getURLParameter(sParam)
             }
             if(date_p.event=="onError"){
               if (date_p.info == 100 || date_p.info == 101 || date_p.info == 150) {
-                var url = getURLParameter("notifyUrl") + "?videoId=" + getURLParameter("videoId") + "&action=" + date_p.info;
+                var url = getURLParameter("notifyUrl") + "?videoId=" + getURLParameter("videoId") + "&action=" + date_p.info + "&orderId=" + getURLParameter("orderId");
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, true);
                 xhttp.send();
