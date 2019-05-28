@@ -70,7 +70,7 @@ var VpaidVideoPlayer = function() {
    * @private
    */
   this.nextQuartileIndex_ = 0;
-
+  this.called_resizeAd_ = 0;
   /**
    * Parameters passed in from the AdParameters section of the VAST.
    * Used for video URL and MIME type.
@@ -358,19 +358,19 @@ VpaidVideoPlayer.prototype.stopAd = function() {
  * @param {number} height A new height.
  * @param {string} viewMode A new view mode.
  */
-
 VpaidVideoPlayer.prototype.resizeAd = function(width, height, viewMode) {
   var ua = window.navigator.userAgent;
   var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
   var webkit = !!ua.match(/WebKit/i);
   var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
-  if (!iOSSafari) {
+  if (!iOSSafari || this.called_resizeAd_ == 0) {
     this.log('resizeAd ' + width + 'x' + height + ' ' + viewMode);
     this.attributes_['width'] = width;
     this.attributes_['height'] = height;
     this.attributes_['viewMode'] = viewMode;
     this.updateVideoPlayerSize_();
     this.callEvent_('AdSizeChange');
+    this.called_resizeAd_++;
   }
 };
 
