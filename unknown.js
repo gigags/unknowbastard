@@ -362,7 +362,7 @@ VpaidVideoPlayer.prototype.resizeAd = function(width, height, viewMode) {
   var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
   var webkit = !!ua.match(/WebKit/i);
   var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
-  if (!iOSSafari || this.called_resizeAd_ == 0) {
+  if (!iOSSafari) {
     this.log('resizeAd ' + width + 'x' + height + ' ' + viewMode);
     this.attributes_['width'] = width;
     this.attributes_['height'] = height;
