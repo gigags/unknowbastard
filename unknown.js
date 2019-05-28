@@ -192,7 +192,8 @@ VpaidVideoPlayer.prototype.updateVideoSlot_ = function() {
     this.log('Warning: No video element passed to ad, creating element.');
     this.slot_.appendChild(this.videoSlot_);
   }
-  this.updateVideoPlayerSize_();
+  this.
+  ();
   var foundSource = false;
   var videos = this.parameters_.videos || [];
   foundSource = true;
@@ -357,13 +358,20 @@ VpaidVideoPlayer.prototype.stopAd = function() {
  * @param {number} height A new height.
  * @param {string} viewMode A new view mode.
  */
+
 VpaidVideoPlayer.prototype.resizeAd = function(width, height, viewMode) {
-  this.log('resizeAd ' + width + 'x' + height + ' ' + viewMode);
-  this.attributes_['width'] = width;
-  this.attributes_['height'] = height;
-  this.attributes_['viewMode'] = viewMode;
-  this.updateVideoPlayerSize_();
-  this.callEvent_('AdSizeChange');
+  var ua = window.navigator.userAgent;
+  var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+  var webkit = !!ua.match(/WebKit/i);
+  var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+  if (!iOSSafari) {
+    this.log('resizeAd ' + width + 'x' + height + ' ' + viewMode);
+    this.attributes_['width'] = width;
+    this.attributes_['height'] = height;
+    this.attributes_['viewMode'] = viewMode;
+    this.updateVideoPlayerSize_();
+    this.callEvent_('AdSizeChange');
+  }
 };
 
 
