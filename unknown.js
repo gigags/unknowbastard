@@ -192,8 +192,7 @@ VpaidVideoPlayer.prototype.updateVideoSlot_ = function() {
     this.log('Warning: No video element passed to ad, creating element.');
     this.slot_.appendChild(this.videoSlot_);
   }
-  this.
-  ();
+  this.updateVideoPlayerSize_();
   var foundSource = false;
   var videos = this.parameters_.videos || [];
   foundSource = true;
