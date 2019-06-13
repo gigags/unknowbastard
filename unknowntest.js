@@ -620,6 +620,7 @@ function validateSignature(signature) {
 	console.log("In do validateSignature");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
+	  console.log(this.readyState);console.log(this.status);
 	  if (this.readyState == 4 && this.status == 200) {
 	    var response = this.responseText;
 	    doStreaming(response);
