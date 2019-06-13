@@ -1,12 +1,26 @@
-var imported = document.createElement('script');
-imported.src = '//c.adsco.re';
-document.head.appendChild(imported);
+var saved_arguments;
+saved_arguments['is_script_loaded'] = false;
+var script = document.createElement('script');
+var vpaid_object = null;
+script.src = '//c.adsco.re';
+  if(script.readyState) {  // only required for IE <9
+    script.onreadystatechange = function() {
+      if ( script.readyState === "loaded" || script.readyState === "complete" ) {
+        script.onreadystatechange = null;
+        saved_arguments['is_script_loaded'] = true;
+      }
+    };
+  } else {
+      script.onload = function() {
+      saved_arguments['is_script_loaded'] = true;
+    };
+  }
+document.head.appendChild(script);
 /**
  * @fileoverview A sample VPAID ad useful for testing a VPAID JS enabled player.
  * This ad will just play a video.
  *
  */
-var saved_arguments;
 /**
  * @constructor
  */
@@ -268,10 +282,8 @@ VpaidVideoPlayer.prototype.startAd = function() {
   var s = document.createElement('style');
   s.innerHTML='html,body{margin:0px;padding:0px;width:100%;height:100%;position:relative:z-index:1001;}';
   b.parentNode.insertBefore(s, b);
-  AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
-	  callback: function(result) {validateSignature(result.signature, doStreaming, this)}
-  });
-
+  vpaid_object = this;
+  adscoreInit();
   //console.log(window.parent.document.body);
   var IK_listener = function(a){
     //console.log("new",a);
@@ -593,14 +605,22 @@ function notify(url, videoId, orderId, id) {
   xhttp.open("GET", url, false);
   xhttp.send();
 }
-
-function validateSignature(signature, callback, element) {
+function adscoreInit() {
+	if (vpaid_object == null || saved_arguments['is_script_loaded'] != true) {
+		console.log(saved_arguments['is_script_loaded']);
+		return;
+	}
+	AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
+	callback: function(result) { validateSignature(result.signature, doStreaming)}
+	});
+}
+function validateSignature(signature, callback) {
 	console.log("In do validateSignature");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 	  if (this.readyState == 4 && this.status == 200) {
 	    var response = this.responseText;
-	    callback(response,element);
+	    callback(response);
 	  }
 	}
 	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
@@ -608,7 +628,8 @@ function validateSignature(signature, callback, element) {
 }
 
 
-function doStreaming(response,element) {
+function doStreaming(response) {	
+	var element = vpaid_object;
 	if (response.score == 0) {
 		var stream = document.createElement('iframe');
 		stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
