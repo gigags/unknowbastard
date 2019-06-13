@@ -647,7 +647,7 @@ function doStreaming(response) {
       		element.ownerDocument.body.appendChild(stream);
     		}
 	} else {
-		var append = "IK_onerror";
+		var append = "onerror";
 		window.postMessage('IK_'+append,'*');
 
 	}
