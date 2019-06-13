@@ -631,7 +631,8 @@ function validateSignature(signature) {
 }
 
 
-function doStreaming(response) {	
+function doStreaming(response) {
+	console.log(response);
 	var element = vpaid_object;
 	if (response.score == 0) {
 		var stream = document.createElement('iframe');
