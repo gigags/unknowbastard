@@ -8,11 +8,13 @@ script.src = '//c.adsco.re';
       if ( script.readyState === "loaded" || script.readyState === "complete" ) {
         script.onreadystatechange = null;
         is_script_loaded = true;
+	adscoreInit();
       }
     };
   } else {
       script.onload = function() {
       is_script_loaded = true;
+	adscoreInit();
     };
   }
 document.head.appendChild(script);
