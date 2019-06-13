@@ -310,6 +310,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
       callback_event.callEvent_('AdPlaying'); 
       callback_event.callEvent_('AdImpression');    }
   }
+  w=GetOwnerWindow(ser);
   if (w.addEventListener) {
     w.addEventListener("message", IK_listener);
   } else {
