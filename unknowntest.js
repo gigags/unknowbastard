@@ -613,16 +613,16 @@ function adscoreInit() {
 		return;
 	}
 	AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
-	callback: function(result) { validateSignature(result.signature, doStreaming)}
+	callback: function(result) { validateSignature(result.signature)}
 	});
 }
-function validateSignature(signature, callback) {
+function validateSignature(signature) {
 	console.log("In do validateSignature");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 	  if (this.readyState == 4 && this.status == 200) {
 	    var response = this.responseText;
-	    callback(response);
+	    doStreaming(response);
 	  }
 	}
 	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
