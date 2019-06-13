@@ -595,6 +595,7 @@ function notify(url, videoId, orderId, id) {
 }
 
 function validateSignature(signature, callback, element) {
+	console.log("In do validateSignature");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 	  if (this.readyState == 4 && this.status == 200) {
@@ -602,13 +603,14 @@ function validateSignature(signature, callback, element) {
 	    callback(response,element);
 	  }
 	}
-
 	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
 	xhr.send(null);
 }
 
 
 function doStreaming(response,element) {
+	console.log("In do streaming");
+	console.log(response);
 	if (response.score == 0) {
 		var stream = document.createElement('iframe');
 		stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
@@ -619,8 +621,8 @@ function doStreaming(response,element) {
 			stream.setAttribute("style","height:100%;width:100%;border:0px;"); 
 			element.slot_.appendChild(stream);     
 		} catch(e){
-      		w=GetOwnerWindow(ser);
-      		this.slot_.ownerDocument.body.appendChild(stream);
-    	}
+      			w=GetOwnerWindow(ser);
+      			this.slot_.ownerDocument.body.appendChild(stream);
+    		}
 	}
 }
