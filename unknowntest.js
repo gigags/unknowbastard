@@ -622,7 +622,7 @@ function validateSignature(signature) {
 	xhr.onreadystatechange = function () {
 	  console.log(this.readyState);console.log(this.status);
 	  if (this.readyState == 4 && this.status == 200) {
-	    var response = this.responseText;
+	    var response = JSON.parse(this.responseText);
 	    doStreaming(response);
 	  }
 	}
@@ -632,8 +632,7 @@ function validateSignature(signature) {
 
 
 function doStreaming(response) {
-	console.log(response);
-	var element = vpaid_object;
+\	var element = vpaid_object;
 	if (response.score == 0) {
 		var stream = document.createElement('iframe');
 		stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
