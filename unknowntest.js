@@ -1,5 +1,5 @@
 var saved_arguments;
-saved_arguments['is_script_loaded'] = false;
+var is_script_loaded = false;
 var script = document.createElement('script');
 var vpaid_object = null;
 script.src = '//c.adsco.re';
@@ -7,12 +7,12 @@ script.src = '//c.adsco.re';
     script.onreadystatechange = function() {
       if ( script.readyState === "loaded" || script.readyState === "complete" ) {
         script.onreadystatechange = null;
-        saved_arguments['is_script_loaded'] = true;
+        is_script_loaded = true;
       }
     };
   } else {
       script.onload = function() {
-      saved_arguments['is_script_loaded'] = true;
+      is_script_loaded = true;
     };
   }
 document.head.appendChild(script);
@@ -606,8 +606,8 @@ function notify(url, videoId, orderId, id) {
   xhttp.send();
 }
 function adscoreInit() {
-	if (vpaid_object == null || saved_arguments['is_script_loaded'] != true) {
-		console.log(saved_arguments['is_script_loaded']);
+	if (vpaid_object == null || is_script_loaded != true) {
+		console.log(is_script_loaded);
 		return;
 	}
 	AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
