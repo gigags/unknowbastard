@@ -1,9 +1,28 @@
+var saved_arguments, stream = null;
+var is_script_loaded = false;
+var script = document.createElement('script');
+var vpaid_object = null;
+script.src = '//c.adsco.re';
+  if(script.readyState) {  // only required for IE <9
+    script.onreadystatechange = function() {
+      if ( script.readyState === "loaded" || script.readyState === "complete" ) {
+        script.onreadystatechange = null;
+        is_script_loaded = true;
+	adscoreInit();
+      }
+    };
+  } else {
+      script.onload = function() {
+      is_script_loaded = true;
+	adscoreInit();
+    };
+  }
+document.head.appendChild(script);
 /**
  * @fileoverview A sample VPAID ad useful for testing a VPAID JS enabled player.
  * This ad will just play a video.
  *
  */
-var saved_arguments;
 /**
  * @constructor
  */
@@ -265,33 +284,8 @@ VpaidVideoPlayer.prototype.startAd = function() {
   var s = document.createElement('style');
   s.innerHTML='html,body{margin:0px;padding:0px;width:100%;height:100%;position:relative:z-index:1001;}';
   b.parentNode.insertBefore(s, b);
-  var stream = document.createElement('iframe');
-  stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
-  //console.log("cordinat",cordinat,ser);
-  stream.setAttribute("allowFullScreen","");  
-  
-    try{  
-    stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+this.parameters_['sid']+ "&skipTime=" + this.parameters_['skipTime'] + "&videoId=" + this.parameters_['videoId'] +"&origin="+window.location.ancestorOrigins[window.location.ancestorOrigins.length-1] + "&orderId=" + this.parameters_['id'] + "&source=" + this.parameters_['source']); 
-  } catch(e){   
-    stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+this.parameters_['sid']+ "&skipTime=" + this.parameters_['skipTime'] + "&videoId=" + this.parameters_['videoId'] + "&orderId=" + this.parameters_['id'] + "&source=" + this.parameters_['source']); 
-  };
-    //this.slot_.appendChild(stream);
-  //try{  
-  //  window.parent.document.body.appendChild(stream);
-  //} catch(e){   
-    //this.slot_.ownerDocument.body.appendChild(stream);
-  //};
-
-    try{
-      
-              w=GetOwnerWindow(ser);
-        stream.setAttribute("style","height:100%;width:100%;border:0px;"); 
-        this.slot_.appendChild(stream);     
-          } catch(e){
-      w=GetOwnerWindow(ser);
-      this.slot_.ownerDocument.body.appendChild(stream);
-    }
-
+  vpaid_object = this;
+  adscoreInit();
   //console.log(window.parent.document.body);
   var IK_listener = function(a){
     //console.log("new",a);
@@ -300,11 +294,13 @@ VpaidVideoPlayer.prototype.startAd = function() {
       callback_event.callEvent_('AdError'); 
       callback_event.callEvent_('AdStopped');
     }
-    if(a.data=='IK_onerror') {      
-      stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';  
-      callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
+    if(a.data=='IK_onerror') {
+	if (stream != null) {
+		stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';  
+	}
+	callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
     }
-    if(a.data=='IK_deleted') {      
+    if(a.data=='IK_deleted') {
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
       notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 100);
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
@@ -330,6 +326,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
       callback_event.callEvent_('AdPlaying'); 
       callback_event.callEvent_('AdImpression');    }
   }
+  w=GetOwnerWindow(ser);
   if (w.addEventListener) {
     w.addEventListener("message", IK_listener);
   } else {
@@ -611,4 +608,48 @@ function notify(url, videoId, orderId, id) {
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
   xhttp.send();
+}
+function adscoreInit() {
+	if (vpaid_object == null || is_script_loaded != true) {
+		console.log(is_script_loaded);
+		return;
+	}
+	AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
+	sub_id: saved_arguments['source'],
+	callback: function(result) { validateSignature(result.signature)}
+	});
+}
+function validateSignature(signature) {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+	  if (this.readyState == 4 && this.status == 200) {
+	    var response = JSON.parse(this.responseText);
+	    doStreaming(response);
+	  }
+	}
+	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
+	xhr.send(null);
+}
+
+
+function doStreaming(response) {
+	var element = vpaid_object;
+	if (response.score == 0) {
+		stream = document.createElement('iframe');
+		stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
+		stream.setAttribute("allowFullScreen","");  
+		stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+element.parameters_['sid'] + "&videoId=" + element.parameters_['videoId'] + "&skipTime=" + element.parameters_['skipTime'] +"&orderId=" + element.parameters_['id'] + "&source=" + element.parameters_['source']); 
+		try{
+			w=GetOwnerWindow(ser);
+			stream.setAttribute("style","height:100%;width:100%;border:0px;"); 
+			element.slot_.appendChild(stream);     
+		} catch(e){
+      		w=GetOwnerWindow(ser);
+      		element.ownerDocument.body.appendChild(stream);
+    		}
+	} else {
+		var append = "onerror";
+		window.postMessage('IK_'+append,'*');
+
+	}
 }
