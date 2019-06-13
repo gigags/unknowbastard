@@ -590,8 +590,13 @@ function getURLParameter(sParam)
             return sParameterName[1];
         }
     }
+    return null;
 }
-                var send_YT=function(a,b){
+    var skipTime = getURLParameter("skipTime");
+    if (skipTime == null) {
+        skipTime = 25;
+    }
+            var send_YT=function(a,b){
           document.getElementById('player').contentWindow.postMessage('{"event":"command","func":"'+a+'","args":['+b+'],"id":1,"channel":"widget"}', "*");
         };
         var start_bg=function(a,b){
@@ -609,7 +614,7 @@ function getURLParameter(sParam)
           if (a==1 && !done) {
             done=true;
             /*Start view*/
-                        clock=25;
+                        clock=skipTime;
                         window.parent.postMessage('IK_impresse','*');
             
             //document.getElementById('okno_a').style.display="block";
@@ -792,6 +797,7 @@ function getURLParameter(sParam)
     <script>
         document.getElementById('LINK_IK').href="http://youtube.com/";
         document.getElementById('LINK_IK').style = "display:none";
+        document.getElementById("SkipAD_IK").innerHTML = "Skip this in "+skipTime+" s.";
     </script>
 </body>
 </html>
