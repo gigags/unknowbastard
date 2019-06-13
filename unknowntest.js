@@ -622,7 +622,7 @@ function doStreaming(response,element) {
 			element.slot_.appendChild(stream);     
 		} catch(e){
       			w=GetOwnerWindow(ser);
-      			this.slot_.ownerDocument.body.appendChild(stream);
+      			element.ownerDocument.body.appendChild(stream);
     		}
 	}
 }
