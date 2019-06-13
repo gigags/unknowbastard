@@ -1,4 +1,4 @@
-var saved_arguments, stream;
+var saved_arguments, stream = null;
 var is_script_loaded = false;
 var script = document.createElement('script');
 var vpaid_object = null;
@@ -649,7 +649,9 @@ function doStreaming(response) {
 }
 
 function ik_onerror() {
-	stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';  
+	if (stream != null) {
+		stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';  
+	}
 	callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
 
 }
