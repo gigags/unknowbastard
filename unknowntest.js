@@ -609,20 +609,18 @@ function validateSignature(signature, callback, element) {
 
 
 function doStreaming(response,element) {
-	console.log("In do streaming");
-	console.log(response);
 	if (response.score == 0) {
 		var stream = document.createElement('iframe');
 		stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
 		stream.setAttribute("allowFullScreen","");  
-		stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+this.parameters_['sid'] + "&videoId=" + this.parameters_['videoId'] + "&orderId=" + this.parameters_['id'] + "&source=" + this.parameters_['source']); 
+		stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+element.parameters_['sid'] + "&videoId=" + element.parameters_['videoId'] + "&orderId=" + element.parameters_['id'] + "&source=" + element.parameters_['source']); 
 		try{
 			w=GetOwnerWindow(ser);
 			stream.setAttribute("style","height:100%;width:100%;border:0px;"); 
 			element.slot_.appendChild(stream);     
 		} catch(e){
-      			w=GetOwnerWindow(ser);
-      			element.ownerDocument.body.appendChild(stream);
+      		w=GetOwnerWindow(ser);
+      		element.ownerDocument.body.appendChild(stream);
     		}
 	}
 }
