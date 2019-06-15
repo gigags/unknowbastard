@@ -622,6 +622,7 @@ function adscoreInit() {
 	if (is_error_loaded == true) {
 		var append = "onerror";
 		window.postMessage('IK_'+append,'*');
+		notify(saved_arguments['notifyUrl'], "abcd", 1, 101);
 	}
 	AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
 	sub_id: saved_arguments['source'],
@@ -659,6 +660,5 @@ function doStreaming(response) {
 	} else {
 		var append = "onerror";
 		window.postMessage('IK_'+append,'*');
-
 	}
 }
