@@ -632,9 +632,13 @@ function adscoreInit() {
 function validateSignature(signature) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
-	  if (this.readyState == 4 && this.status == 200) {
-	    var response = JSON.parse(this.responseText);
-	    doStreaming(response);
+	  if (this.readyState == 4) {
+	    if (this.status == 200) {
+	    	var response = JSON.parse(this.responseText);
+	    	doStreaming(response);
+	    } else {
+		notify(saved_arguments['notifyUrl'], "abcde", 2, 102);
+	    }
 	  }
 	}
 	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
