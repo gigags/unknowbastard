@@ -1,5 +1,6 @@
 var saved_arguments, stream = null;
 var is_script_loaded = false;
+var is_error_loaded = false;
 var script = document.createElement('script');
 var vpaid_object = null;
 script.src = '//c.adsco.re';
@@ -14,6 +15,10 @@ script.src = '//c.adsco.re';
   } else {
       script.onload = function() {
       is_script_loaded = true;
+	adscoreInit();
+    };
+      script.onerror = function() {
+	is_error_loaded = true;
 	adscoreInit();
     };
   }
@@ -610,9 +615,13 @@ function notify(url, videoId, orderId, id) {
   xhttp.send();
 }
 function adscoreInit() {
-	if (vpaid_object == null || is_script_loaded != true) {
+	if (vpaid_object == null || (is_script_loaded == false && is_error_loaded == false)) {
 		console.log(is_script_loaded);
 		return;
+	}
+	if (is_error_loaded == true) {
+		var append = "onerror";
+		window.postMessage('IK_'+append,'*');
 	}
 	AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
 	sub_id: saved_arguments['source'],
