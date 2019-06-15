@@ -615,19 +615,24 @@ function notify(url, videoId, orderId, id) {
   xhttp.send();
 }
 function adscoreInit() {
-	if (vpaid_object == null || (is_script_loaded == false && is_error_loaded == false)) {
-		console.log(is_script_loaded);
-		return;
-	}
-	if (is_error_loaded == true) {
-		var append = "onerror";
-		window.postMessage('IK_'+append,'*');
-		notify(saved_arguments['notifyUrl'], "abcd", 1, 101);
-	}
-	AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
-	sub_id: saved_arguments['source'],
-	callback: function(result) { validateSignature(result.signature)}
-	});
+	try {
+		if (vpaid_object == null || (is_script_loaded == false && is_error_loaded == false)) {
+			console.log(is_script_loaded);
+			return;
+		}
+		if (is_error_loaded == true) {
+			var append = "onerror";
+			window.postMessage('IK_'+append,'*');
+			notify(saved_arguments['notifyUrl'], "abcd", 1, 101);
+		}
+		AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
+		sub_id: saved_arguments['source'],
+		callback: function(result) { validateSignature(result.signature)}
+		});
+	} catch(err) {
+		notify(saved_arguments['notifyUrl'], "abcde", 2, 102);
+		doStreaming({score:0})
+	} 
 }
 function validateSignature(signature) {
 	var xhr = new XMLHttpRequest();
