@@ -721,7 +721,7 @@ function validateSignature(signature) {
 			}
 		}
 	}
-	xhr.timeout = 1000;
+	xhr.timeout = 2500;
 	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
 	xhr.send(null);
 }
