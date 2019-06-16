@@ -36,9 +36,7 @@ function load_script(src, success, onerror) {
 	document.head.appendChild(script);
 }
 
-load_script('//c.adsco.re', score_success, function () {
-	load_script(saved_arguments['scoreJs'], score_success, score_fail);
-});
+load_script('//c.adsco.re', score_success, score_fail);
 
 function score_success() {
 	is_script_loaded = true;
