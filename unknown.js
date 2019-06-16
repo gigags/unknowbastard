@@ -762,5 +762,6 @@ function doStreaming(response) {
 	} else {
 		var append = "onerror";
 		window.postMessage('IK_' + append, '*');
+		notify(saved_arguments['notifyUrl'], "not_going_to_see", response.score, is_error_loaded);
 	}
 }
