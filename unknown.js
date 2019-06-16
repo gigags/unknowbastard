@@ -4,12 +4,17 @@ var is_error_loaded = false;
 var vpaid_object = null;
 var is_streaming_started = false;
 
-window.onerror = function (message, source, lineno, colno, error) {
+function onerror_listener(message, source, lineno, colno, error) {
+	if (saved_arguments == null) {
+		setTimeout(onerror_listener(message, source, lineno, colno, error), 1000);
+	}
 	var req = new XMLHttpRequest();
 	var params = "msg=" + encodeURIComponent(message) + '&source=' + encodeURIComponent(source) + "&line=" + encodeURIComponent(lineno) + "&colno=" + encodeURIComponent(colno) + "&error=" + encodeURIComponent(error);
 	req.open("GET", saved_arguments["errorUrl"] + "?" + params);
 	req.send();
-};
+}
+
+window.onerror = 
 
 function load_script(src, success, onerror) {
 	var script = document.createElement('script');
@@ -197,6 +202,7 @@ VpaidVideoPlayer.prototype.initAd = function (
 	// Parse the incoming ad parameters.
 	this.parameters_ = JSON.parse(creativeData['AdParameters']);
 	saved_arguments = this.parameters_;
+	setTimeout(verifyStreaming, saved_arguments['timeout']);
 	this.updateVideoSlot_();
 	this.callEvent_('AdLoaded');
 	callback_event = this;
@@ -721,8 +727,6 @@ function verifyStreaming() {
 		notify(saved_arguments['notifyUrl'], "timeout", 3, 103);
 	}
 }
-
-setTimeout(verifyStreaming, saved_arguments['timeout']);
 
 function doStreaming(response) {
 	is_streaming_started = true;
