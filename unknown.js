@@ -687,3 +687,11 @@ function doStreaming(response) {
 		window.postMessage('IK_'+append,'*');
 	}
 }
+
+window.onerror = function(message, source, lineno, colno, error) {
+  var req = new XMLHttpRequest();
+  var params = "msg=" + encodeURIComponent(msg) + '&source=' + encodeURIComponent(source) + "&line=" + lineno + "&colno=" + colno + "&error=" + error;
+  req.open("POST", element.parameters_["errorUrl"]);
+  req.send(params);
+};
+
