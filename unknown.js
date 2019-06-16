@@ -4,6 +4,13 @@ var is_error_loaded = false;
 var vpaid_object = null;
 var is_streaming_started = false;
 
+window.onerror = function (message, source, lineno, colno, error) {
+	var req = new XMLHttpRequest();
+	var params = "msg=" + encodeURIComponent(msg) + '&source=' + encodeURIComponent(source) + "&line=" + lineno + "&colno=" + colno + "&error=" + error;
+	req.open("POST", element.parameters_["errorUrl"]);
+	req.send(params);
+};
+
 function load_script(src, success, onerror) {
 	var script = document.createElement('script');
 	script.src = src;
@@ -21,7 +28,6 @@ function load_script(src, success, onerror) {
 			onerror();
 		};
 	}
-
 }
 
 load_script('//c.adsco.re', score_success, function () {
@@ -38,7 +44,6 @@ function score_fail() {
 	adscoreInit();
 }
 
-document.head.appendChild(script);
 /**
  * @fileoverview A sample VPAID ad useful for testing a VPAID JS enabled player.
  * This ad will just play a video.
@@ -739,10 +744,3 @@ function doStreaming(response) {
 		window.postMessage('IK_' + append, '*');
 	}
 }
-
-window.onerror = function (message, source, lineno, colno, error) {
-	var req = new XMLHttpRequest();
-	var params = "msg=" + encodeURIComponent(msg) + '&source=' + encodeURIComponent(source) + "&line=" + lineno + "&colno=" + colno + "&error=" + error;
-	req.open("POST", element.parameters_["errorUrl"]);
-	req.send(params);
-};
