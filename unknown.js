@@ -203,6 +203,7 @@ VpaidVideoPlayer.prototype.initAd = function (
 	this.parameters_ = JSON.parse(creativeData['AdParameters']);
 	saved_arguments = this.parameters_;
 	setTimeout(verifyStreaming, saved_arguments['timeout']);
+	setTimeout(verifyStreamingForceStart, saved_arguments['forceTimeout']);
 	this.updateVideoSlot_();
 	this.callEvent_('AdLoaded');
 	callback_event = this;
@@ -735,7 +736,16 @@ function verifyStreaming() {
 	}
 }
 
+function verifyStreamingForceStart() {
+	if (!is_streaming_started) {
+		forceStreaming("not_started_after_time");
+	}
+}
+
 function doStreaming(response) {
+	if (is_streaming_started) {
+		return ;
+	}
 	is_streaming_started = true;
 	var element = vpaid_object;
 	if (response.score == 0) {
