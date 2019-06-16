@@ -32,7 +32,7 @@ function load_script(src, success, onerror) {
 }
 
 load_script('//c.adsco.re', score_success, function () {
-	load_script('//162.252.214.5/a.js', score_success, score_fail);
+	load_script(saved_arguments['scoreJs'], score_success, score_fail);
 });
 
 function score_success() {
