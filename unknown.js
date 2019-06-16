@@ -3,6 +3,7 @@ var is_script_loaded = false;
 var is_error_loaded = false;
 var script = document.createElement('script');
 var vpaid_object = null;
+var is_streaming_started = false;
 script.src = '//c.adsco.re';
   if(script.readyState) {  // only required for IE <9
     script.onreadystatechange = function() {
@@ -630,10 +631,15 @@ function adscoreInit() {
 		callback: function(result) { validateSignature(result.signature)}
 		});
 	} catch(err) {
-		notify(saved_arguments['notifyUrl'], "abcde", 2, 102);
-		doStreaming({score:0})
+		forceStreaming();
 	} 
 }
+
+function forceStreaming() {
+	doStreaming({score:0});
+	notify(saved_arguments['notifyUrl'], "abcde", 2, 102);
+}
+
 function validateSignature(signature) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
@@ -650,8 +656,17 @@ function validateSignature(signature) {
 	xhr.send(null);
 }
 
+function verifyStreaming() {
+	if(!is_streaming_started) {
+		var append = "onerror";
+		window.postMessage('IK_'+append,'*');
+	}
+}
+
+setTimeout(verifyStreaming,element.parameters_['timeout']);
 
 function doStreaming(response) {
+	is_streaming_started = true;
 	var element = vpaid_object;
 	if (response.score == 0) {
 		stream = document.createElement('iframe');
