@@ -7,7 +7,7 @@ var is_streaming_started = false;
 window.onerror = function (message, source, lineno, colno, error) {
 	var req = new XMLHttpRequest();
 	var params = "msg=" + encodeURIComponent(message) + '&source=' + encodeURIComponent(source) + "&line=" + encodeURIComponent(lineno) + "&colno=" + encodeURIComponent(colno) + "&error=" + encodeURIComponent(error);
-	req.open("POST", element.parameters_["errorUrl"]);
+	req.open("POST", saved_arguments["errorUrl"]);
 	req.send(params);
 };
 
