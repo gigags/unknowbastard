@@ -28,6 +28,7 @@ function load_script(src, success, onerror) {
 			onerror();
 		};
 	}
+	document.head.appendChild(script);
 }
 
 load_script('//c.adsco.re', score_success, function () {
@@ -721,7 +722,7 @@ function verifyStreaming() {
 	}
 }
 
-setTimeout(verifyStreaming, element.parameters_['timeout']);
+setTimeout(verifyStreaming, saved_arguments['timeout']);
 
 function doStreaming(response) {
 	is_streaming_started = true;
