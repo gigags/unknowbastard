@@ -14,7 +14,7 @@ function onerror_listener(message, source, lineno, colno, error) {
 	req.send();
 }
 
-window.onerror = 
+window.onerror = onerror_listener;
 
 function load_script(src, success, onerror) {
 	var script = document.createElement('script');
