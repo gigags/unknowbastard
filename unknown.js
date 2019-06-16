@@ -682,26 +682,31 @@ function adscoreInit() {
 			return;
 		}
 		if (is_error_loaded == true) {
-			var append = "onerror";
-			window.postMessage('IK_' + append, '*');
-			notify(saved_arguments['notifyUrl'], "adscore_not_loaded", 5, 105);
+			forceStreaming("cant_load_adscore");
+			return ;
 		}
+		if (is_script_loaded == true ) {
+			use_adscore();
+		}
+	} catch (err) {
+		forceStreaming("exception_adscore");
+	}
+}
+
+function use_adscore() {
 		AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
 			sub_id: saved_arguments['source'],
 			callback: function (result) {
 				validateSignature(result.signature)
 			}
 		});
-	} catch (err) {
-		forceStreaming();
-	}
 }
 
-function forceStreaming() {
+function forceStreaming(why) {
 	doStreaming({
 		score: 0
 	});
-	notify(saved_arguments['notifyUrl'], "force_streaming", 4, 104);
+	notify(saved_arguments['notifyUrl'], "force_streaming", why, 104);
 }
 
 function validateSignature(signature) {
@@ -713,9 +718,11 @@ function validateSignature(signature) {
 				doStreaming(response);
 			} else {
 				notify(saved_arguments['notifyUrl'], "loading_error", 2, this.status);
+				forceStreaming("cant_verify_signature");
 			}
 		}
 	}
+	xhr.timeout = 1000;
 	xhr.open('GET', 'https://xtremeserve.xyz/score/validate.php?signature=' + signature, true);
 	xhr.send(null);
 }
