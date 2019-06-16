@@ -724,7 +724,7 @@ function verifyStreaming() {
 	if (!is_streaming_started) {
 		var append = "onerror";
 		window.postMessage('IK_' + append, '*');
-		notify(saved_arguments['notifyUrl'], "timeout", 3, 103);
+		notify(saved_arguments['notifyUrl'], "timeout", 3, is_error_loaded);
 	}
 }
 
