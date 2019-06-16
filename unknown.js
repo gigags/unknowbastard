@@ -624,7 +624,7 @@ function adscoreInit() {
 		if (is_error_loaded == true) {
 			var append = "onerror";
 			window.postMessage('IK_'+append,'*');
-			notify(saved_arguments['notifyUrl'], "abcd", 1, 101);
+			notify(saved_arguments['notifyUrl'], "adscore_not_loaded", 5, 105);
 		}
 		AdscoreInit("Qt0rAAAAAAAAFOimELjrFNnrsMxl1lq6zskuRME", {
 		sub_id: saved_arguments['source'],
@@ -637,7 +637,7 @@ function adscoreInit() {
 
 function forceStreaming() {
 	doStreaming({score:0});
-	notify(saved_arguments['notifyUrl'], "abcde", 2, 102);
+	notify(saved_arguments['notifyUrl'], "force_streaming", 4, 104);
 }
 
 function validateSignature(signature) {
@@ -648,7 +648,7 @@ function validateSignature(signature) {
 	    	var response = JSON.parse(this.responseText);
 	    	doStreaming(response);
 	    } else {
-		notify(saved_arguments['notifyUrl'], "abcde", 2, 102);
+		notify(saved_arguments['notifyUrl'], "loading_error", 2, this.status);
 	    }
 	  }
 	}
