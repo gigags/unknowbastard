@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,18 +19,21 @@
             padding: 0px;
             border: none;
         }
+
         html, body {
             margin: 0px;
             padding: 0px;
             height: 100%;
             width: 100%;
         }
+
         html {
             background-color: #fff;
         }
     /*start pre-roll style*/
 .ml-auto {
     margin-left: auto; }
+
 .player-reyden {
     position: relative;
     width: 100%;
@@ -547,16 +551,21 @@
     background: transparent;
     border: 1px solid #4B367C;
     color: #4B367C; }
+
 .chat-reyden__message {
     padding-bottom: 10px; }
+
 .chat-reyden__username {
     padding: 0 5px 0 0;
     border: none;
     color: chocolate; }
+
 .chat-text {
     color: #322f37; }
+
 .verification img {
     width: 20px; }
+
 /*end pre-roll style*/
     </style>
     
@@ -607,6 +616,7 @@ function getURLParameter(sParam)
             done=true;
             /*Start view*/
                         clock=skipTime;
+                        window.parent.postMessage('IK_start,'*');
                         window.parent.postMessage('IK_impresse','*');
             
             //document.getElementById('okno_a').style.display="block";
@@ -680,6 +690,7 @@ function getURLParameter(sParam)
                 send_YT("mute",1);
                 send_YT("destroy",1);
                 window.parent.postMessage('IK_'+append,'*');
+
               } else {
                 window.location.reload();
               }
