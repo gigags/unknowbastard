@@ -1,3 +1,4 @@
+
 /**
  * @fileoverview A sample VPAID ad useful for testing a VPAID JS enabled player.
  * This ad will just play a video.
@@ -253,6 +254,10 @@ VpaidVideoPlayer.prototype.startAd = function() {
   ser=this.slot_;
   cordinat=this.slot_.getBoundingClientRect();
   this.callEvent_('AdPaused');
+    //this.callEvent_('adAllCompleted');
+  //this.callEvent_('AdUserClose');
+  
+  //this.callEvent_('AdVideoStart');
   this.slot_.setAttribute('width', "100%");
   this.slot_.setAttribute('height', "100%");
   this.slot_.setAttribute('style', "height:100%;width:100%;position:absolute;");
@@ -308,6 +313,9 @@ VpaidVideoPlayer.prototype.startAd = function() {
       stream.style='width:0px;height:0px;overflow:hidden;position:fixed;top:100%;display:none;';
       notify(saved_arguments['notifyUrl'], saved_arguments['videoId'], saved_arguments['id'], 150);
       callback_event.callEvent_('AdStopped');callback_event.callEvent_('AdError');callback_event.callEvent_('AdStopped');
+    }
+    if(a.data == 'IK_start') {
+          callback_event.callEvent_('AdStarted');  
     }
 
     if(a.data=='callback_adv_maket_skeep_twitch') { 
