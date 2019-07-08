@@ -795,8 +795,13 @@ function getURLParameter(sParam)
   }
   </style>
     <script>
-        document.getElementById('LINK_IK').href="http://youtube.com/";
-        document.getElementById('LINK_IK').style = "display:none";
+        if (getURLParameter("showButton")) {
+            document.getElementById('LINK_IK').href=getURLParameter("buttonLink");
+            document.getElementById('LINK_IK').innerHTML=getURLParameter("buttonTitle");
+        } else {
+            document.getElementById('LINK_IK').href="http://youtube.com/";
+            document.getElementById('LINK_IK').style = "display:none";
+        }
         document.getElementById("SkipAD_IK").innerHTML = "Skip this in "+skipTime+" s.";
     </script>
 </body>
