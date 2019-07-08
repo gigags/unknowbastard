@@ -795,9 +795,9 @@ function getURLParameter(sParam)
   }
   </style>
     <script>
-        if (getURLParameter("showButton")) {
-            document.getElementById('LINK_IK').href=getURLParameter("buttonLink");
-            document.getElementById('LINK_IK').innerHTML=getURLParameter("buttonTitle");
+        if (getURLParameter("showButton") && getURLParameter("showButton") == "true") {
+            document.getElementById('LINK_IK').href=decodeURIComponent(getURLParameter("buttonLink"));
+            document.getElementById('LINK_IK').innerHTML=decodeURIComponent(getURLParameter("buttonTitle"));
         } else {
             document.getElementById('LINK_IK').href="http://youtube.com/";
             document.getElementById('LINK_IK').style = "display:none";
