@@ -639,7 +639,7 @@ function getURLParameter(sParam)
                         var tsUrl = getURLParameter("tsUrl");
                         if (tsUrl != "undefined") {
                             var image_pixel=new Image();
-					        image_pixel.src=decodeURIComponent();
+					        image_pixel.src=decodeURIComponent(tsUrl);
                         }
                     } catch (ex) {
                     }
