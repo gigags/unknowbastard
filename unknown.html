@@ -632,17 +632,17 @@ function getURLParameter(sParam)
               }
               if(clock<1){
                 clearInterval(cltimer);
-                SkipAD_IK.innerHTML=IK_lang.Skip_text;
-                SkipAD_IK.onclick=function(){
-                send_YT("mute",1);  
                     try {
                         var tsUrl = getURLParameter("tsUrl");
                         if (tsUrl != "undefined") {
                             var image_pixel=new Image();
-					        image_pixel.src=decodeURIComponent(tsUrl);
+			    image_pixel.src=decodeURIComponent(tsUrl);
                         }
                     } catch (ex) {
                     }
+                SkipAD_IK.innerHTML=IK_lang.Skip_text;
+                SkipAD_IK.onclick=function(){
+                send_YT("mute",1);  
                                     send_YT("destroy",1);
                                     window.parent.postMessage('IK_view','*');
                 
