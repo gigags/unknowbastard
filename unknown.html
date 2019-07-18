@@ -632,14 +632,6 @@ function getURLParameter(sParam)
               }
               if(clock<1){
                 clearInterval(cltimer);
-                    try {
-                        var tsUrl = getURLParameter("tsUrl");
-                        if (tsUrl != "undefined") {
-                            var image_pixel=new Image();
-			    image_pixel.src=decodeURIComponent(tsUrl);
-                        }
-                    } catch (ex) {
-                    }
                 SkipAD_IK.innerHTML=IK_lang.Skip_text;
                 SkipAD_IK.onclick=function(){
                 send_YT("mute",1);  
