@@ -613,8 +613,6 @@ function getURLParameter(sParam)
           statusPlay=a;
           if (a == 0 && done) {
                 clearInterval(cltimer);
-                SkipAD_IK.innerHTML=IK_lang.Skip_text;
-                SkipAD_IK.onclick=function(){
                 send_YT("mute",1);  
                 send_YT("destroy",1);
                 window.parent.postMessage('IK_view','*');
