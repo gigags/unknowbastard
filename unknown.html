@@ -696,7 +696,8 @@ function getURLParameter(sParam)
                 window.parent.postMessage('IK_'+append,'*');
 
               } else {
-                window.location.reload();
+                send_YT("mute",1);
+                send_YT("destroy",1);
               }
             }
             if(date_p.event=="onReady"){
