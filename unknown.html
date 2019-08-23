@@ -703,8 +703,7 @@ function getURLParameter(sParam)
                 window.parent.postMessage('IK_'+append,'*');
 
               } else {
-                send_YT("mute",1);
-                send_YT("destroy",1);
+                window.location.reload();	
               }
             }
             if(date_p.event=="onReady"){
