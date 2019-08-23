@@ -684,6 +684,15 @@ function getURLParameter(sParam)
                 //console.log(date_p.info['playerState']);
                 EventStateYT(date_p.info['playerState']);
               }
+              try {
+                if (date_p.info['duration'] != undefined && date_p.info['duration'] == 0) {
+                    var append="durationissue";
+                    send_YT("mute",1);
+                    send_YT("destroy",1);
+                    window.parent.postMessage('IK_'+append,'*');
+
+                }
+              } catch (e) {}
             }
             if(date_p.event=="onError"){
               if (date_p.info == 100 || date_p.info == 101 || date_p.info == 150) {
