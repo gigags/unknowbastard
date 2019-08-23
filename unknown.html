@@ -687,8 +687,6 @@ function getURLParameter(sParam)
               try {
                 if (date_p.info['duration'] != undefined && date_p.info['duration'] == 0) {
                     var append="durationissue";
-                    send_YT("mute",1);
-                    send_YT("destroy",1);
                     window.parent.postMessage('IK_'+append,'*');
 
                 }
