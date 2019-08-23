@@ -686,9 +686,7 @@ function getURLParameter(sParam)
               }
               try {
                 if (date_p.info['duration'] != undefined && date_p.info['duration'] == 0) {
-                    var append="durationissue";
-                    window.parent.postMessage('IK_'+append,'*');
-
+                     console.log(JSON.stringify(date_p.info));
                 }
               } catch (e) {}
             }
