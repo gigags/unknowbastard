@@ -671,7 +671,7 @@ function getURLParameter(sParam)
           try{
             date_p=JSON.parse(a.data);
             if(date_p.event=="infoDelivery"){
-              console.log(date_p);
+//               console.log(date_p);
               if(date_p.info['videoData']['video_id'] == getURLParameter("videoId")){
                 if(date_p.info['playbackQuality']=="unknown"){
                   //window.location.reload();
