@@ -320,7 +320,7 @@ var new_video = function(){
           height: '360',
 	  host:'https://www.youtube.com',
           width: '640',
-          videoId: 'eOj-0mDgbaM' ,
+          videoId: 'uHMo_ilRuec' ,
            'autoplay': 0,
           playsinline: true,
 		  'tiny':'small',
