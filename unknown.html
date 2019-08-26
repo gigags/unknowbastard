@@ -641,8 +641,9 @@ function getURLParameter(sParam)
                 SkipAD_IK.innerHTML=IK_lang.Skip_text;
                 SkipAD_IK.onclick=function(){
                 send_YT("mute",1);  
-                                    send_YT("destroy",1);
-                                    window.parent.postMessage('IK_view','*');
+                send_YT("destroy",1);
+                window.parent.postMessage('IK_view','*');
+                send_YT("setPlaybackRate",'0.25');
                 
                 };
               }
