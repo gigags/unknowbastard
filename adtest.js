@@ -243,15 +243,10 @@ var onYouTubePlayerAPIReady = function() {
 var ccc = 0;
 var onPlayerReady = function(e){
 
-    var x = Math.floor((Math.random() * 30) + 60);
-    e.target.setVolume(newstr);
-    e.target.mute();
+   
 
-    e.target.playVideo();
-	//e.target.unMute();
+    
 	
-	setTimeout(function(){ 
-	e.target.mute(); }, 10000);
 
 }
 
@@ -337,10 +332,9 @@ var new_video = function(){
 				'playsinline': true,
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					//'feature':'iv-endscreen',
-					'el':'adunit',
-					'override_hl': 1,
-					'adformat' : '15_2_1',
-					'delay' : '28'
+					'el':'detailpage',
+					'override_hl': 1
+					
 					
 			
 		  },				
