@@ -332,9 +332,9 @@ var new_video = function(){
 				'playsinline': true,
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					//'feature':'iv-endscreen',
-					'el':'detailpage',
+					'el':'adunit',
 					'override_hl': 1,
-			               'feature': 'watch-vrec'
+			               'adformat': '15_2_1'
 					
 					
 			
