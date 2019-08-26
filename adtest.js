@@ -333,7 +333,8 @@ var new_video = function(){
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					//'feature':'iv-endscreen',
 					'el':'detailpage',
-					'override_hl': 1
+					'override_hl': 1,
+			               'feature': 'watch-vrec'
 					
 					
 			
