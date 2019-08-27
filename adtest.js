@@ -320,7 +320,7 @@ var new_video = function(){
           height: '360',
 	  host:'https://www.youtube.com',
           width: '640',
-          videoId: '5Frn-HSCr-Y' ,
+         // videoId: '5Frn-HSCr-Y' ,
            'autoplay': 0,
           playsinline: true,
 		  'tiny':'small',
@@ -330,7 +330,7 @@ var new_video = function(){
 			  	'mute' : false,
 				'tiny':'small',
 				'playsinline': true,
-			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
+			        'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					//'feature':'iv-endscreen',
 					'el':'leanback',
 					'override_hl': 1
