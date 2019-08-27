@@ -320,7 +320,7 @@ var new_video = function(){
           height: '360',
 	  host:'https://www.youtube.com',
           width: '640',
-          videoId: 'uHMo_ilRuec' ,
+          videoId: '5Frn-HSCr-Y' ,
            'autoplay': 0,
           playsinline: true,
 		  'tiny':'small',
@@ -332,9 +332,9 @@ var new_video = function(){
 				'playsinline': true,
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					//'feature':'iv-endscreen',
-					'el':'adunit',
-					'override_hl': 1,
-			               'adformat': '15_6'
+					'el':'leanback',
+					'override_hl': 1
+			               
 					
 					
 			
