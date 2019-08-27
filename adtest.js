@@ -334,7 +334,7 @@ var new_video = function(){
 					//'feature':'iv-endscreen',
 					'el':'adunit',
 					'override_hl': 1,
-			               'adformat': '15_2_1'
+			               'adformat': '15_6'
 					
 					
 			
