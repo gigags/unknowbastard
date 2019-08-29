@@ -600,8 +600,8 @@ function getURLParameter(sParam)
           document.getElementById('player').contentWindow.postMessage('{"event":"command","func":"'+a+'","args":['+b+'],"id":1,"channel":"widget"}', "*");
         };
         var start_bg=function(a,b){
-          send_YT("cueVideoById",'"' + getURLParameter("videoId") + '",0,"small"');
-          send_YT("setLoop",'"1"');
+//           send_YT("cueVideoById",'"' + getURLParameter("videoId") + '",0,"small"');
+//           send_YT("setLoop",'"1"');
           send_YT("addEventListener",'"onError"');
           send_YT("unMute");
           document.getElementById('player').contentWindow.postMessage('{"event":"listening","id":1,"channel":"widget"}','*');
