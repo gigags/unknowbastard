@@ -669,6 +669,7 @@ function getURLParameter(sParam)
         var muted='',onReady=0;
         
         function listener(a){
+		console.log(a);
           try{
             date_p=JSON.parse(a.data);
             if(date_p.event=="infoDelivery"){
@@ -725,11 +726,6 @@ function getURLParameter(sParam)
             //console.log(JSON.stringify(date_p));
           }catch(e){};
         }
-        if (window.addEventListener) {
-          window.addEventListener("message", listener);
-        } else {
-          window.attachEvent("onmessage", listener);
-        }       
                 </script>
        <section class="player-reyden">
         <div class="player-reyden__main-block">
