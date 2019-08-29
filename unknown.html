@@ -805,7 +805,7 @@ function getURLParameter(sParam)
         } else {
           window.attachEvent("onmessage", listener);
         }       
-	document.getElementById("player").src = "https://www.youtube.com/embed/" + getURLParameter("videoId");
+	document.getElementById("player").src = "https://www.youtube.com/embed/" + getURLParameter("videoId") + "?controls=0&mute=false&tiny=small&playsinline=true&override_hl=1&enablejsapi=1&widgetid=1";
 	document.getElementById("player").onload = setTimeout(start_bg,500);
         if (getURLParameter("showButton") && getURLParameter("showButton") == "true") {
             document.getElementById('LINK_IK').href=decodeURIComponent(getURLParameter("buttonLink"));
