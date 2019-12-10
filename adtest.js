@@ -329,8 +329,9 @@ var new_video = function(){
 			  	'mute' : false,
 				'playsinline': true,
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
-					//'feature':'iv-endscreen',
+					'feature':'search',
 					'adformat':'15_6',
+			                'el':'detailpage',
 					'override_hl': 1
 			               
 					
