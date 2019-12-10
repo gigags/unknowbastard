@@ -330,7 +330,7 @@ var new_video = function(){
 				'playsinline': true,
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					//'feature':'iv-endscreen',
-					'el':'leanback',
+					'adformat':'15_6',
 					'override_hl': 1
 			               
 					
