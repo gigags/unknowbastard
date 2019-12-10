@@ -323,16 +323,14 @@ var new_video = function(){
           videoId: '5Frn-HSCr-Y' ,
            'autoplay': 0,
           playsinline: true,
-		  'tiny':'small',
 		  playerVars: {
 			 // 'list': 'PL_yIBWagYVjztnssruzd0PHc92RY8giOA',
 			   'controls': 0, 
 			  	'mute' : false,
-				'tiny':'small',
 				'playsinline': true,
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					//'feature':'iv-endscreen',
-					'el':'unplugged',
+					'el':'leanback',
 					'override_hl': 1
 			               
 					
