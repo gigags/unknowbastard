@@ -332,7 +332,7 @@ var new_video = function(){
 					'feature':'search',
 					'adformat':'15_6',
 			                'el':'profilepage',
-			                'delay':'9';
+			                'delay':'9'
 					'override_hl': 1
 			               
 					
