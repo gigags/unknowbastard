@@ -331,7 +331,8 @@ var new_video = function(){
 			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
 					'feature':'search',
 					'adformat':'15_6',
-			                'el':'detailpage',
+			                'el':'profilepage',
+			                'delay':'9';
 					'override_hl': 1
 			               
 					
