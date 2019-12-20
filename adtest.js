@@ -328,7 +328,7 @@ var new_video = function(){
 			   'controls': 0, 
 			  	'mute' : false,
 				'playsinline': true,
-			        //'playlist':'eOj-0mDgbaM,eOj-0mDgbaM',
+			        'playlist':'0580sBdoAX4',
 			                'el':'adunit',
 			                'adformat':'15_2_1',
 					'override_hl': 1
