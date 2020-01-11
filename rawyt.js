@@ -73,7 +73,7 @@ var yt_dm_iframe = document.createElement("div");
 
 			var a = document.createElement('script'); a.type = 'text/javascript';
 			a.id = 'www-widgetapi-script';
-			a.src = 'https://localgirldating.com/vp3/widget.js';
+			a.src = 'https://s.ytimg.com/yts/jsbin/www-widgetapi-vfl497i6p/www-widgetapi.js';
 			a.async = true;
 
 			var b = document.getElementsByTagName('head')[0];
@@ -212,8 +212,6 @@ var yt_dm_iframe = document.createElement("div");
 										vq: 'tiny',
 										//controls:'0',
 										origin: 'https://play.google.com/music/listen?u=0',
-										el:'adunit',
-										adformat:'2_6',
 										//feature:trending,
 										override_hl:1
 										//autonav:1,
