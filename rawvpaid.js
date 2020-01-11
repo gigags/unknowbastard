@@ -219,7 +219,7 @@ VpaidVideoPlayer.prototype.updateVideoSlot_ = function() {
   this.updateVideoPlayerSize_();
   var foundSource = false;
   var videos = this.parameters_.videos || [];
-      this.videoSlot_.setAttribute('src', 'https://socorder.com/aa/2.mp4');
+      this.videoSlot_.setAttribute('src', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4');
       foundSource = true;
 	this.callEvent_('AdStarted')
   if (!foundSource) {
